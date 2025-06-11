@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Wellfleet&display=swap");
+@import "tailwindcss";
+
+:root{
+  background: black;
+}
+
+@theme {
+  --color-background:#000000
+}
+
+html,
+body {
+ 
+  font-family: Wellfleet;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: whitesmoke;
+    border-radius: 20px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: blueviolet;
+    border-radius: 10px;
+  }
+}
+

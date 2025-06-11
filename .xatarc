@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://kshititz-saxena-s-workspace-00q0tl.ap-southeast-2.xata.sh/db/M2_Remastered",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}
