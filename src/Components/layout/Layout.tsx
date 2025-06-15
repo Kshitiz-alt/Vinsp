@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 
 import Sidebar from "./Layouts/Sidebar"
 import Navbar from "./Layouts/Navbar"
-import type { selectedSongs } from "../.."
+import type { selectedSongs } from "../../types"
 import { useState } from "react"
 
 const Layout = () => {

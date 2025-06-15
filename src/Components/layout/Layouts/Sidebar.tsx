@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next";
 import { BiDownload, BiLibrary } from "react-icons/bi";
 import { LuLibrary } from "react-icons/lu"
-import type { selectedSongs } from "../../..";
+import type { selectedSongs } from "../../../types";
 import Download from "../../../Constants/CustomDL";
 
 type siderbarProps = {

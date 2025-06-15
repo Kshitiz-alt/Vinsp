@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { SONGS } from "../../Constants/Fetch"
-import type { Songtypes } from "../.."
+import type { Songtypes } from "../../types"
 import { Link } from "react-router-dom"
 import { motion } from 'framer-motion'
 

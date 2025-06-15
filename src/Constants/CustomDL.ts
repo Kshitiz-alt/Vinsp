@@ -1,4 +1,4 @@
-import type { selectedSongs } from ".."
+import type { selectedSongs } from "../types"
 
 
 const Download = async(selectedSongs:selectedSongs[]) => {

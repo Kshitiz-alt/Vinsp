@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion'
 import { useEffect, useState } from "react";
-import type { artistTypes } from "../..";
+import type { artistTypes } from "../../types";
 import { ARTISTS } from "../../Constants/Fetch";
 
 const ArtistsSub = () => {

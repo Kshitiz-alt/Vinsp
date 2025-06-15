@@ -1,7 +1,7 @@
 
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react"
 import { SONGS } from "../../Constants/Fetch"
-import { type selectedSongs, type Songtypes } from "../.."
+import { type selectedSongs, type Songtypes } from "../../types"
 
 import SongCard from "../../Components/subComponents/SongCard"
 import { useOutletContext } from "react-router-dom"
