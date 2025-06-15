@@ -3,7 +3,7 @@ import type { selectedSongs } from "../types"
 
 const Download = async(selectedSongs:selectedSongs[]) => {
     try {
-        const response = await fetch(`${import.meta.env.BACKEND_URL}/api/download`,{
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/download`,{
             method: 'POST',
             headers:{
                 'Content-type' : 'application/json'
