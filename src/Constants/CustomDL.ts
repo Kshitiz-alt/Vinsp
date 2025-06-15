@@ -3,7 +3,7 @@ import type { selectedSongs } from "../types"
 
 const Download = async(selectedSongs:selectedSongs[]) => {
     try {
-        const response = await fetch('http://localhost:5000/api/download',{
+        const response = await fetch('https://m2-remastered.vercel.app/api/download',{
             method: 'POST',
             headers:{
                 'Content-type' : 'application/json'
