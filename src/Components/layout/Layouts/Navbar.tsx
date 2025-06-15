@@ -1,21 +1,33 @@
 import { AnimatePresence, motion } from "framer-motion"
-import { useState } from "react"
+import { useRef, useState, type ChangeEvent } from "react"
 import { BiLogoGithub, BiSearch } from "react-icons/bi"
 import Langbtn from "../../subComponents/Langbtn"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 const Navbar = () => {
+    const navigate = useNavigate()
+    const ref = useRef(null)
+
+    const { t } = useTranslation()
+
     const [extend, setExtend] = useState(false)
 
 
 
-    const handle = () => {
-
+    const handle = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (value) {
+            navigate("/search");
+        } else {
+            navigate("/");
+        }
     }
+
     return (
         <>
-            <nav className="fixed w-full flex p-4 max-sm:bottom-0">
-                <Link to="/" className="text-white text-4xl text-nowrap p-1 tracking-wider max-sm:hidden">M2 CONNECT</Link>
+            <nav className="fixed w-full flex p-4  max-sm:bottom-0 z-30">
+                <Link to="/" className="text-white bg-black/80 backdrop-blur-sm text-4xl text-nowrap p-1.5 rounded-xl tracking-wider max-sm:hidden">M2 CONNECT</Link>
                 <header className="flex gap-4 justify-end w-full">
                     {/*Search bar */}
                     <AnimatePresence>
@@ -30,10 +42,12 @@ const Navbar = () => {
                                 whileTap={{ rotate: 90 }}
                             >
 
-                                <BiSearch className="cursor-pointer  transition-opacity duration-300 ease-in-out" size={23} color="black" onSubmit={handle} onClick={() => setExtend(!extend)} />
+                                <BiSearch className="cursor-pointer  transition-opacity duration-300 ease-in-out" size={23} color="black" onClick={() => setExtend(!extend)} />
                             </motion.aside>
                             {extend && (
                                 <motion.input
+                                    ref={ref}
+                                    onChange={(e) => handle(e)}
                                     key="searchbar"
                                     initial={{ opacity: 0, width: 0 }}
                                     animate={{ opacity: 1, width: '360px' }}
@@ -41,7 +55,7 @@ const Navbar = () => {
                                     transition={{ type: "spring", stiffness: 100, duration: 0.6 }}
                                     className=" outline-none placeholder:text-[15px] overflow-hidden min-w-0 max-sm:hidden"
                                     type="text"
-                                    placeholder="Search albums , songs and podcasts"
+                                    placeholder={t("search")}
                                 />)}
                         </motion.div>
                         <Langbtn />

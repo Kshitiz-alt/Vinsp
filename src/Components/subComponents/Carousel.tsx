@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import api from "../../Constants/Fetch"
+import { SONGS }  from "../../Constants/Fetch"
 import type { Songtypes } from "../.."
 import { motion } from "framer-motion"
 
@@ -11,7 +11,7 @@ const Carousel = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await api("clover", 30)
+        const res = await SONGS("clover", 30)
         if (res?.data) {
           setPlaylists(res.data.results)
         }
@@ -42,7 +42,7 @@ const Carousel = () => {
           {playlists.map((song) => (
             <motion.div
               key={song.id}
-              className="min-w-[420px] h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg"
+              className="min-w-[420px] h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg max-lg:min-w-[350px] "
               initial={{opacity:.8}}
               whileHover={{ scale: 1.05 , opacity:10 }}
               whileTap={{ scale: 0.95 }}
@@ -50,7 +50,7 @@ const Carousel = () => {
               <img
                 src={song.image[2].url}
                 alt={song.name}
-                className="w-full h-full object-cover cursor-pointer"
+                className="w-full h-full object-cover cursor-pointer "
               />
             </motion.div>
           ))}

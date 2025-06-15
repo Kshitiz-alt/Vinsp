@@ -1,15 +1,17 @@
 import NewTracksSub from "../Components/subPages/NewTracksSub"
 import Carousel from "../Components/subComponents/Carousel"
+import AlbumsSub from "../Components/subPages/AlbumsSub"
+import ArtistsSub from "../Components/subPages/ArtistsSub"
 
 const Mainpage = () => {
   return (
     <section className="">
-      <div>
-        <Carousel />
+      <Carousel />
+      <div className="absolute flex-col top-1/4 p-1">
+          <NewTracksSub />
+          <AlbumsSub />
+          <ArtistsSub/>
       </div>
-      <aside className="absolute top-1/2 p-1">
-        <NewTracksSub />
-      </aside>
     </section>
   )
 }

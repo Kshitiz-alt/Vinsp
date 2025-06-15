@@ -21,8 +21,16 @@ body {
     border-radius: 20px;
   }
   ::-webkit-scrollbar-thumb {
-    background: blueviolet;
+    background:rgb(255, 162, 162);
     border-radius: 10px;
   }
 }
 
+@layer utilities {
+  .Scroll {
+    scrollbar-width: none;
+    &::-webkit-scrollbar{
+      display: none;
+    }
+  }
+}
