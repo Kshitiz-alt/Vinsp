@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { SONGS }  from "../../Constants/Fetch"
-import type { Songtypes } from "../../types"
+import { SONGS }  from "../../../Constants/Fetch"
+import type { Songtypes } from "../../../types"
 import { motion } from "framer-motion"
 
 const Carousel = () => {

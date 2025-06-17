@@ -9,14 +9,14 @@ const ArtistsSub = () => {
     const [artist, setArtist] = useState<artistTypes[]>([])
 
     useEffect(() => {
-        
-        const ids = ["1274170", "1906686","3871652","670448"];
+
+        const ids = ["1274170", "1906686", "3871652", "670448"];
         const fetchData = async () => {
             const res = await Promise.all(
                 ids.map(id => ARTISTS(id))
-            ) 
+            )
             const validRes = res.filter(artist => artist != null)
-                setArtist(validRes)
+            setArtist(validRes)
         }
         fetchData()
     }, [])
@@ -32,11 +32,11 @@ const ArtistsSub = () => {
             </div>
             <div className="flex gap-7 p-5">
                 {artist.map((userName) => (
-                    <div  key={userName.id}>
+                    <div key={userName.id}>
                         <p>{userName.name}</p>
-                        <motion.img 
-                        className="min-w-[200px] h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer" 
-                        key={userName.id} src={userName.image[2].url} alt="" />
+                        <motion.img
+                            className="min-w-[200px] h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer"
+                            key={userName.id} src={userName.image[2].url} alt="" />
 
                     </div>
                 ))}

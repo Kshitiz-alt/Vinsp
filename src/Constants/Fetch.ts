@@ -12,6 +12,18 @@ export const SONGS = async (query:string,limit:number) => {
     }
 }
 
+export const ALBUMS = async (id:string) => {
+    try {
+        const TopSongs = await axios.get(`https://saavn.dev/api/albums?id=${id}`)
+        const { data } = TopSongs.data
+        console.log(data)
+        return {data}
+    } catch (error) {
+        console.error("Couldn't fetch songs", error)
+    }
+}
+
+
 export const ARTISTS = async (id:string) => {
     
     try {

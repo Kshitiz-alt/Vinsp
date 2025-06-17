@@ -1,11 +1,6 @@
 import { useState } from 'react';
-type downloadTypes = {
-  title: string;
-  audio: string;
-  image: string;
-  artist: string;
-  onSelect?: (song: {title:string , audio : string , image: string}, isChecked: boolean) => void;
-}
+import type { downloadTypes } from '../../types';
+
 
 const SongCard = ({ image, artist, audio , onSelect , title }:downloadTypes) => {
   const [hover, setHover] = useState(false);
