@@ -28,11 +28,15 @@ export const ARTISTS = async (id:string) => {
     
     try {
         const TopSongs = await axios.get(`https://saavn.dev/api/artists?id=${id}`)
-        console.log(TopSongs)
+        // console.log(TopSongs)
         return TopSongs.data.data
     } catch (error) {
         console.error("Couldn't fetch artists", error)
     }
 }
 
-
+export function ProperTitle (str: string):string{
+    const title = document.createElement('textarea')
+    title.innerHTML = str;
+    return title.value 
+} 

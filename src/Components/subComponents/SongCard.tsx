@@ -18,7 +18,7 @@ const SongCard = ({ image, artist, audio , onSelect , title }:downloadTypes) => 
         <audio controls src={audio} />
         <div className="flex gap-2 ">
         <input className="h-4 w-4 mt-1" type="checkbox"  onChange={(e)=>onSelect?.({title,audio,image},e.target.checked)} />
-        <p>Add in your playlist?</p>
+        {/* <p>Add in your playlist?</p> */}
         </div>
       </div>
       

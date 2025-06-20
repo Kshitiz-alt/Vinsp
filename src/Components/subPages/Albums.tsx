@@ -10,12 +10,12 @@ const Albums = () => {
   const [albums, setAlbums] = useState<albumsTypes[]>([])
 
   useEffect(() => {
-    const ids = ["23241654", "61765108", "59189008"]
+    const ids = ["23241654", "49720765", "57614295","45320251","33008911"]
     const fetchData = async () => {
       const res = await Promise.all(
         ids.map(id => ALBUMS(id))
       )
-      console.log(res)
+      // console.log(res)
       const validRes = res
         .filter(albums => albums !== undefined)
         .map(album => (
@@ -33,18 +33,17 @@ const Albums = () => {
   const { t } = useTranslation()
 
   return (
-    <section>
+    <section className="max-sm:w-74">
       <div className="flex justify-between">
         <h1 className="text-white text-2xl">{t('hitAlbums')}</h1>
       </div>
-      <div className="flex gap-7 p-5">
+      <div className="grid grid-cols-5 gap-7 p-5 max-sm:gap-35 overflow-x-scroll">
         {albums.map((album) => (
-          <Link to={`/albums/${album.id}`}>
+          <Link to={`/albums/${album.id}`} key={album.id} >
             <motion.img
               whileHover={{ scale: 1.05 }}
-              className="min-w-[200px] h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer"
-              key={album.id}
-              src={album.image[2].url}
+              className="min-w-0 h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:max-w-32 max-sm:max-h-32"
+              src={album.image?.[2]?.url}
               alt="" />
           </Link>
         ))}

@@ -15,7 +15,7 @@ i18n.use(LanguageDetector)
                     hitAlbums: "Hit Albums",
                     library:"Your Library",
                     search: "Search albums , songs and podcasts"
-                }
+                },
             },
             fr: {
                 translation:

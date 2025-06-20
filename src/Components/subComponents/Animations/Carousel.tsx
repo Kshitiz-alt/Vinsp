@@ -32,8 +32,8 @@ const Carousel = () => {
   }, [playlists])
 
   return (
-    <section className="w-full overflow-hidden p-6">
-      <div className="relative w-full">
+    <section className="w-full overflow-hidden p-20 max-sm:p-25">
+      <div className="w-full">
         <motion.div
           className="flex gap-9"
           animate={{ x: `-${currentIndex * 460}px` }}
@@ -42,7 +42,7 @@ const Carousel = () => {
           {playlists.map((song) => (
             <motion.div
               key={song.id}
-              className="min-w-[420px] h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg max-lg:min-w-[350px] "
+              className="min-w-[420px] h-[240px] rounded-xl overflow-hidden shadow-lg max-sm:max-w-30 max-sm:max-h-52 "
               initial={{opacity:.8}}
               whileHover={{ scale: 1.05 , opacity:10 }}
               whileTap={{ scale: 0.95 }}

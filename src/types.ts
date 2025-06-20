@@ -24,6 +24,8 @@ export interface AlbumItenary {
     audio: string;
     image: string;
     artists: string[];
+    isCurrent: boolean;
+    onAudioPlay : (ref:HTMLAudioElement) => void;
     onSelect?: (song: { title: string, audio: string, image: string }, isChecked: boolean) => void;
 }
 
@@ -57,7 +59,7 @@ export interface selectedSongs {
 export interface albumsTypes {
     id: string,
     name: string,
-    image: { url: string }[]
+    image?: { url: string }[]
 }
 
 export interface artistTypes {

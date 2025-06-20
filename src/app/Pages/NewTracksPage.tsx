@@ -32,11 +32,7 @@ const NewTracksPage = () => {
 
 
   return (
-    <section>
-     
-      <div className="flex justify-between">
-
-      </div>
+    <section className="relative h-screen overflow-y-scroll ">
       <div className="grid grid-cols-4 gap-7 p-5">
         {Tracks.map((songData) => (
           <SongCard

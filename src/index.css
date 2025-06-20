@@ -18,7 +18,7 @@ body {
     width: 5px;
   }
   &::-webkit-scrollbar-track {
-    background: whitesmoke;
+    background: transparent;
     border-radius: 20px;
   }
   &::-webkit-scrollbar-thumb {
@@ -35,3 +35,4 @@ body {
     }
   }
 }
+

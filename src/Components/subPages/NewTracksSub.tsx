@@ -25,17 +25,17 @@ const NewTracksSub = () => {
   
   
   return (
-    <section>
+    <section className="max-sm:w-74">
       <div className="flex justify-between">
 
         <h1 className="text-white text-2xl">{t('newTracks')}</h1>
         <Link to="/newtracks" className="text-white text-lg tracking-wide cursor-pointer opacity-70 hover:opacity-100">{t('showall')}</Link>
       </div>
-      <div className="flex gap-7 p-5">
+      <div className=" gap-10 max-sm:gap-35 p-5 grid grid-cols-5 max-sm:overflow-x-scroll">
         {playlists.map((song) => (
           <motion.img 
           whileHover={{scale:1.05}}
-          className="min-w-[200px] h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer" 
+          className="min-w-0 h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:max-h-32 max-sm:max-w-32" 
           key={song.id} 
           src={song.image[2].url} 
           alt="songImage" />

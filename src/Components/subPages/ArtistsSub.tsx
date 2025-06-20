@@ -24,19 +24,20 @@ const ArtistsSub = () => {
     const { t } = useTranslation()
 
     return (
-        <section>
+        <section className="max-sm:w-74">
             <div className="flex justify-between">
 
                 <h1 className="text-white text-2xl">{t('artistTrack')}</h1>
                 <Link to="/newtracks" className="text-white text-lg tracking-wide cursor-pointer opacity-70 hover:opacity-100">{t('showall')}</Link>
             </div>
-            <div className="flex gap-7 p-5">
+            <div className="grid grid-cols-5 gap-7 p-5 max-sm:gap-35 overflow-x-scroll">
                 {artist.map((userName) => (
                     <div key={userName.id}>
-                        <p>{userName.name}</p>
                         <motion.img
-                            className="min-w-[200px] h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer"
-                            key={userName.id} src={userName.image[2].url} alt="" />
+                            className="min-w-0 h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:max-h-32 max-sm:max-w-32"
+                            src={userName.image[2].url} alt=""
+                        />
+                        <p className="text-white text-sm text-center max-sm:text-[10px] whitespace-nowrap">{userName.name}</p>
 
                     </div>
                 ))}

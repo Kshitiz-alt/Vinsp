@@ -26,9 +26,9 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="fixed w-full flex p-4  max-sm:bottom-0 z-30">
+            <nav className="w-full fixed flex p-4 z-30 max-sm:bg-cream/40">
                 <Link to="/" className="text-white bg-black/80 backdrop-blur-sm text-4xl text-nowrap p-1.5 rounded-xl tracking-wider max-sm:hidden">M2 CONNECT</Link>
-                <header className="flex gap-4 justify-end w-full">
+                <header className="flex gap-4 justify-end w-full h-12">
                     {/*Search bar */}
                     <AnimatePresence>
                         <motion.div key="git-icon" whileTap={{ rotate: 90 }} className="flex items-center gap-2 p-3 px-3 bg-gradient-to-r from-white to-white/70 border-2 focus-within:border-purple-500 rounded-full">
