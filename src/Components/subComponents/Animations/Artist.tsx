@@ -23,7 +23,7 @@ const Artist = ({ artists }: { artists: string[] }) => {
                 animate={{opacity:1,y:0}}
                 transition={{duration:2,type:"spring",stiffness:100}}
                 exit={{opacity:0,y:-20}}
-                className="text-white w-58"
+                className="text-white w-58 max-sm:text-[9px]"
                 >
                     {artists[index]}
                 </motion.div>

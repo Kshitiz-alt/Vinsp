@@ -7,6 +7,7 @@ import Layout from './Components/layout/Layout';
 import NewTracksPage from './app/Pages/NewTracksPage';
 import AlbumsPage from './app/Pages/AlbumsPage';
 import SearchPage from './app/SearchPage';
+import ArtistsPage from './app/Pages/ArtistsPage';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route index element={<Mainpage/>}/>
             <Route path='/newtracks' element={<NewTracksPage/>}/>
             <Route path='/albums/:id' element={<AlbumsPage/>}/>
+            <Route path='/artists/:id' element={<ArtistsPage/>}/>
             <Route path='/search' element={<SearchPage/>}/>
           </Route>
         </Routes>

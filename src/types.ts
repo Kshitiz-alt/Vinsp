@@ -1,4 +1,3 @@
-
 export interface downloadTypes {
     title: string;
     audio: string;
@@ -10,7 +9,7 @@ export interface Songtypes {
     index: string
     id: string;
     name: string;
-    album?: string;
+    album?: {id:string};
     year?: string;
     primaryArtists?: string;
     image: { url: string }[];
@@ -34,7 +33,7 @@ type Artist = {
   name: string
   role: string
   type: string
-  image: string[] // or whatever type image actually is
+  image: {url:string}[]
 }
 
 
@@ -54,6 +53,7 @@ export interface selectedSongs {
     audio: string
     id?: string;
     image?: string;
+    artist?:string
 }
 
 export interface albumsTypes {
@@ -70,4 +70,45 @@ export interface artistTypes {
     year?: string;
     primaryArtists?: string;
     image: { url: string }[];
+    artist?: string;
+}
+
+export interface artistStateTypes {
+    duration:number;
+    id:string;
+    name:string;
+    language:string;
+    artists:{all:Artist[]}
+}
+
+export interface SearchTypes {
+    image?:{url:string}[];
+    duration:number;
+    id:string
+    name:string;
+    title:string;
+    value?:string;
+    artists?:{all:Artist[]}
+}
+
+export interface SearchAlbumTypes {
+    image?:{url:string}[];
+    name:string;
+    title:string
+    id:string;
+    artist?:string
+    length:number
+}
+
+export interface SearchArtistTypes{
+    id:string;
+    description:string;
+    image?:{url:string}[];
+    title:string
+}
+
+export interface playbarTypes{
+    song:string;
+    title:string;
+    downloadUrl:{url:string}
 }

@@ -34,8 +34,8 @@ const Albums = () => {
 
   return (
     <section className="max-sm:w-74">
-      <div className="flex justify-between">
-        <h1 className="text-white text-2xl">{t('hitAlbums')}</h1>
+      <div className="flex justify-between max-sm:bg-cream/40 max-sm:p-1 rounded-[5px]">
+        <h1 className="text-white text-2xl max-sm:text-lg">{t('hitAlbums')}</h1>
       </div>
       <div className="grid grid-cols-5 gap-7 p-5 max-sm:gap-35 overflow-x-scroll">
         {albums.map((album) => (

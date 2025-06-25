@@ -44,10 +44,10 @@ const AlbumsPage = () => {
 
   return (
     <section className="relative flex max-sm:flex-col max-sm:min-h-screen">
-      <div className="fixed p-20 z-20 max-sm:w-full max-sm:backdrop-blur-[5px] max-sm:top-5">
+      <div className="fixed p-30 top-15 z-20 max-sm:p-20 max-sm:w-full max-sm:backdrop-blur-[5px] max-sm:top-5">
         {albumData?.image?.[2]?.url && (
           <div>
-            <img className="w-[24em]  inset-shadow-2xl shadow-lg shadow-cream" src={albumData.image[2].url} alt="" />
+            <img className="w-[24em] shadow-lg shadow-cream" src={albumData.image[2].url} alt="" />
             <span className="text-white">{ProperTitle(albumData.name)}</span>
           </div>
         )}

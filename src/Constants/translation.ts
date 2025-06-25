@@ -14,7 +14,8 @@ i18n.use(LanguageDetector)
                     artistTrack:"Best of Artists",
                     hitAlbums: "Hit Albums",
                     library:"Your Library",
-                    search: "Search albums , songs and podcasts"
+                    search: "Search albums , songs and podcasts",
+                    searchquery:"Your Search Query :"
                 },
             },
             fr: {
@@ -25,7 +26,8 @@ i18n.use(LanguageDetector)
                     artistTrack:"Meilleur des artistes",
                     hitAlbums: "albums à succès",
                     library:"votre bibliothèque",
-                    search: "Rechercher des albums, des chansons et des podcasts"
+                    search: "Rechercher des albums, des chansons et des podcasts",
+                    searchquery:"Votre requête de recherche :"
                 }
             },
             Ru: {
@@ -36,7 +38,8 @@ i18n.use(LanguageDetector)
                     artistTrack:"Лучшие художники",
                     hitAlbums: "хитовые альбомы",
                     library:"ваша библиотека",
-                    search: "Ищите альбомы, песни и подкасты"
+                    search: "Ищите альбомы, песни и подкасты",
+                    searchquery:"ваш поисковый запрос :"
                 }
             },
             zh: {
@@ -48,6 +51,7 @@ i18n.use(LanguageDetector)
                     hitAlbums: "热门专辑",
                     library:"你的图书馆",
                     search: "搜索专辑、歌曲和播客",
+                    searchquery:"你的搜索查询 :"
                 }
             }
 

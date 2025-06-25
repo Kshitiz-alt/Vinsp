@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import type { AlbumItenary } from "../../types"
 import Artist from "./Animations/Artist"
-import { LuMicVocal} from "react-icons/lu"
+import { LuMicVocal } from "react-icons/lu"
 import { ProperTitle } from "../../Constants/Fetch"
 
 const AlbumItem = ({ duration, artists, onSelect, title, audio, image, onAudioPlay, isCurrent }: AlbumItenary) => {
@@ -25,7 +25,7 @@ const AlbumItem = ({ duration, artists, onSelect, title, audio, image, onAudioPl
             setPlaying(false)
         }
     }
-    const ChangedTitle = useMemo(()=> ProperTitle(title),[title])
+    const ChangedTitle = useMemo(() => ProperTitle(title), [title])
 
     useEffect(() => {
         if (!isCurrent && isPlaying) {
@@ -36,24 +36,26 @@ const AlbumItem = ({ duration, artists, onSelect, title, audio, image, onAudioPl
             }
         }
     }, [isCurrent, isPlaying])
-    
-    
+
+
     return (
         <>
-            <div className="flex items-center gap-2">
-                <div ref={hoverRef} className="p-3 w-2xl hover:bg-cream border overflow-hidden border-cream rounded-2xl transition-all duration-150 ease-in-out cursor-pointer flex justify-between max-sm:w-full max-sm:text-[10px]" onClick={() => handleWithAudio()}>
-                    <p
-                        onMouseEnter={() => setHover(true)}
-                        onMouseLeave={() => setHover(false)}
-                        className={`text-white w-60 transition-all duration-300 ease-in-out max-sm:text-[10px] ${hover ? "line-clamp-3 max-h-17 max-sm:max-h-10" : "line-clamp-1 max-h-6 max-sm:max-h-3"}`}
-                    >
-                        {ChangedTitle}
-                    </p>
-                    <div className="flex gap-2">
-                        <LuMicVocal size={20} color="red" />
-                        <Artist artists={artists} />
-                    </div>
-                    <span className="max-sm:text-cream">{Math.ceil(duration / 60)}mins</span>
+            {/* <div className="flex items-center gap-2"> */}
+                <div ref={hoverRef} className="p-3  hover:bg-cream border overflow-hidden border-cream rounded-2xl transition-all duration-150 ease-in-out cursor-pointer flex max-sm:gap-0 max-sm:text-[10px]" onClick={() => handleWithAudio()}>
+                    <figure className="flex max-sm:flex-col gap-2">
+                        <p
+                            onMouseEnter={() => setHover(true)}
+                            onMouseLeave={() => setHover(false)}
+                            className={`text-white w-48 transition-all duration-300 ease-in-out max-sm:w-30 max-sm:line-clamp-1 max-sm:text-[11px] ${hover ? "line-clamp-3 max-h-17 max-sm:max-h-10" : "line-clamp-1 max-h-6 max-sm:max-h-3"}`}
+                        >
+                            {ChangedTitle}
+                        </p>
+                        <div className="flex">
+                            <LuMicVocal size={20} className="max-sm:hidden" color="red" />
+                            <Artist artists={artists} />
+                        </div>
+                    </figure>
+                    <span className="max-sm:text-cream mr-40">{Math.ceil(duration / 60)}mins</span>
                     <input
                         className="h-4 w-4 mt-1 appearance-none bg-white checked:rounded-full checked:bg-green-300 transition-all duration-300 ease-in-out rounded-[3px]"
                         type="checkbox"
@@ -61,7 +63,7 @@ const AlbumItem = ({ duration, artists, onSelect, title, audio, image, onAudioPl
                         onChange={(e) => onSelect?.({ title, audio, image }, e.target.checked)} />
                     <audio ref={audioRef} hidden src={audio}></audio>
                 </div>
-            </div>
+            {/* </div> */}
         </>
     )
 }
