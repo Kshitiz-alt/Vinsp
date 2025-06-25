@@ -1,10 +1,10 @@
-import { useState } from "react"
 import { useTranslation } from "react-i18next";
 import { BiDownload, BiLibrary } from "react-icons/bi";
 import { LuLibrary } from "react-icons/lu"
 import type { selectedSongs } from "../../../types";
 import Download from "../../../Constants/CustomDL";
 import { ProperTitle } from "../../../Constants/Fetch";
+import { useLayoutContext } from "../../../Constants/Context";
 
 type siderbarProps = {
   selectedSongs: selectedSongs[]
@@ -12,13 +12,14 @@ type siderbarProps = {
 
 const Sidebar = ({ selectedSongs }: siderbarProps) => {
   const { t } = useTranslation()
-  const [extend, setExtend] = useState(false)
+  const { extend,setExtend} = useLayoutContext()
 
   console.log("Selected Songs in Sidebar:", selectedSongs)
 
   const downloadHandle = () => {
     Download(selectedSongs)
   }
+
   return (
     <section className={`fixed top-20 z-30 bg-gray-500/10 rounded-r-2xl  h-10/12 overflow-y-auto Scroll transition-all ease-in-out max-sm:w-0  ${extend ? "px-10 w-3/12  bg-gray-900/95 " : "justify-center"}`}>
       <div className="cursor-pointer py-2" onClick={() => setExtend(!extend)}>

@@ -5,7 +5,7 @@ import Artist from "./Animations/Artist"
 import { LuMicVocal } from "react-icons/lu"
 import { ProperTitle } from "../../Constants/Fetch"
 
-const AlbumItem = ({ duration, artists, onSelect, title, audio, image, onAudioPlay, isCurrent }: AlbumItenary) => {
+const AlbumItem = ({ duration, artists, onSelect, title, audio, image, isCurrent,  onAudioPlay }: AlbumItenary) => {
 
     const hoverRef = useRef(null)
     const audioRef = useRef<HTMLAudioElement>(null)
@@ -40,7 +40,6 @@ const AlbumItem = ({ duration, artists, onSelect, title, audio, image, onAudioPl
 
     return (
         <>
-            {/* <div className="flex items-center gap-2"> */}
                 <div ref={hoverRef} className="p-3  hover:bg-cream border overflow-hidden border-cream rounded-2xl transition-all duration-150 ease-in-out cursor-pointer flex max-sm:gap-0 max-sm:text-[10px]" onClick={() => handleWithAudio()}>
                     <figure className="flex max-sm:flex-col gap-2">
                         <p
@@ -63,7 +62,7 @@ const AlbumItem = ({ duration, artists, onSelect, title, audio, image, onAudioPl
                         onChange={(e) => onSelect?.({ title, audio, image }, e.target.checked)} />
                     <audio ref={audioRef} hidden src={audio}></audio>
                 </div>
-            {/* </div> */}
+
         </>
     )
 }

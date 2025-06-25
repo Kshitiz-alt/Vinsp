@@ -5,7 +5,7 @@ import type { SearchAlbumTypes, SearchArtistTypes, SearchTypes, selectedSongs } 
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-type ContextType = {
+type OutletContextType = {
   selectedSongs: selectedSongs[],
   setSelectedSongs: Dispatch<SetStateAction<selectedSongs[]>>,
   setCurrentSong: Dispatch<SetStateAction<selectedSongs | null>>
@@ -18,19 +18,18 @@ const SearchPage = () => {
   const [searched, setSearched] = useState<SearchTypes[]>([]);
   const [albumState, setAlbumState] = useState<SearchAlbumTypes | null>(null);
   const [artistData, setArtistData] = useState<SearchArtistTypes | null>(null);
-  const { setCurrentSong } = useOutletContext<ContextType>()
+  const { setCurrentSong } = useOutletContext<OutletContextType>()
 
   const handlePlay = (song: SearchTypes) => {
     const selected: selectedSongs = {
       artist: song.artists?.all[0].name,
       title: song.title || song.name,
-      audio: "", // Add logic to fetch or assign audio URL if available
+      audio: song.downloadUrl[4].url,
       id: song.id,
       image: song.image?.[2]?.url || ""
     };
 
     setCurrentSong(selected)
-    console.log("Setting current song:", selected); // Add this
   }
 
   useEffect(() => {
@@ -68,7 +67,7 @@ const SearchPage = () => {
                 <span className="text-cream/70 text-sm ">{albumState.artist}</span>
               </div>
             </Link>
-          )};
+          )}
           {artistData && (
             <Link to={`/artists/${artistData.id}`} className="p-3 rounded-2xl flex gap-3 bg-Gray/10 hover:bg-HovBlue/10">
               <img className="max-w-1/3 rounded-2xl" src={artistData.image?.[2].url} alt="" />
@@ -78,7 +77,7 @@ const SearchPage = () => {
               </div>
 
             </Link>
-          )};
+          )}
         </div>
         <aside className="w-1/2 space-y-4 overflow-y-scroll h-[72vh] bg-blend-color">
           {searched.map((element, index) => (
@@ -92,7 +91,7 @@ const SearchPage = () => {
               </figure>
               <span className="text-white">{Math.ceil(element.duration / 60)} mins</span>
             </div>
-          ))};
+          ))}
         </aside>
       </section>
     </section>

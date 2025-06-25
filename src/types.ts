@@ -89,6 +89,7 @@ export interface SearchTypes {
     title:string;
     value?:string;
     artists?:{all:Artist[]}
+    downloadUrl:{url:string}[]
 }
 
 export interface SearchAlbumTypes {
