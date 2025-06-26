@@ -1,16 +1,13 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from "react"
-import type { selectedSongs } from "../../types"
+import type { PlayProps } from "../../types"
 import { ProperTitle } from '../../Constants/Fetch'
 import { useLayoutContext } from '../../Constants/Context'
 import { LuPause, LuPlay } from 'react-icons/lu'
 
 
-type PlayProps = {
-    song: selectedSongs;
-    onEnd: () => void;
-}
+
 
 const Playbar = ({ song, onEnd }: PlayProps) => {
 

@@ -124,3 +124,8 @@ export interface playbarTypes{
     title:string;
     downloadUrl:{url:string}
 }
+
+export interface PlayProps{
+    song: selectedSongs;
+    onEnd: () => void;
+}
