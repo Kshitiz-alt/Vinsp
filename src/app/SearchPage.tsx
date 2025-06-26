@@ -1,15 +1,10 @@
-import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
+import { useEffect, useState } from "react";
 import { ProperTitle, SEARCH, useQuery } from "../Constants/Fetch";;
 
-import type { SearchAlbumTypes, SearchArtistTypes, SearchTypes, selectedSongs } from "../types";
+import type { OutletContextType, SearchAlbumTypes, SearchArtistTypes, SearchTypes, selectedSongs } from "../types";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-type OutletContextType = {
-  selectedSongs: selectedSongs[],
-  setSelectedSongs: Dispatch<SetStateAction<selectedSongs[]>>,
-  setCurrentSong: Dispatch<SetStateAction<selectedSongs | null>>
-}
 
 const SearchPage = () => {
   const navigate = useNavigate();
@@ -84,12 +79,12 @@ const SearchPage = () => {
             <div className="flex justify-between bg-Gray/10 p-2 rounded-2xl hover:bg-cream/10 cursor-pointer" key={index} onClick={() => handlePlay(element)}>
               <figure className="flex gap-5">
                 <img className="max-w-25 rounded-2xl" src={element.image?.[2].url} alt="" />
-                <div className="flex flex-col">
+                <div className="flex flex-col w-96">
                   <figcaption className="text-white">{ProperTitle(element.name)}</figcaption>
                   <figcaption className="text-cream/70 text-sm">{element.artists?.all[0].name}</figcaption>
                 </div>
               </figure>
-              <span className="text-white">{Math.ceil(element.duration / 60)} mins</span>
+              <span className="text-cream/70">{Math.ceil(element.duration / 60)} mins</span>
             </div>
           ))}
         </aside>

@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { SONGS } from "../../Constants/Fetch"
-import type { Songtypes } from "../../types"
-import { Link } from "react-router-dom"
+import type { OutletContextType, SearchTypes, selectedSongs, Songtypes } from "../../types"
+import { Link, useOutletContext } from "react-router-dom"
 import { motion } from 'framer-motion'
 
 
 const NewTracksSub = () => {
+  const { t } = useTranslation()
   const [playlists, setPlaylists] = useState<Songtypes[]>([])
+  const {setCurrentSong} = useOutletContext<OutletContextType>()
 
 
   useEffect(() => {
@@ -20,7 +22,18 @@ const NewTracksSub = () => {
     fetchData()
   }, [])
 
-  const { t } = useTranslation()
+  const handlePlay = (song: SearchTypes) => {
+      const selected: selectedSongs = {
+        artist: song.artists?.all[0].name,
+        title: song.title || song.name,
+        audio: song.downloadUrl[4].url,
+        id: song.id,
+        image: song.image?.[2]?.url || ""
+      };
+  
+      setCurrentSong(selected)
+    }
+
 
   
   
@@ -31,12 +44,13 @@ const NewTracksSub = () => {
         <Link to="/newtracks" className="text-white text-lg tracking-wide cursor-pointer opacity-70 hover:opacity-100 max-sm:text-sm">{t('showall')}</Link>
       </div>
       <div className=" gap-10 max-sm:gap-35 p-5 grid grid-cols-5 max-sm:overflow-x-scroll">
-        {playlists.map((song) => (
+        {playlists.map((tracks) => (
           <motion.img 
+          onClick={()=>handlePlay(tracks)}
           whileHover={{scale:1.05}}
           className="min-w-0 h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:max-h-32 max-sm:max-w-32" 
-          key={song.id} 
-          src={song.image[2].url} 
+          key={tracks.id} 
+          src={tracks.image[2].url} 
           alt="songImage" />
         ))}
 

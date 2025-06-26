@@ -9,11 +9,11 @@ import { LayoutContext } from "../../Constants/Context";
 
 
 const Layout = () => {
-
-
   const [selectedSongs, setSelectedSongs] = useState<selectedSongs[]>([]);
   const [currentSong, setCurrentSong] = useState<selectedSongs | null>(null);
   const [extend, setExtend] = useState(false)
+
+
 
   return (
     <section className="w-full bg-background/95 flex flex-col">
@@ -21,14 +21,14 @@ const Layout = () => {
         <Navbar />
         <div className="flex">
           <aside className="">
-            <Sidebar selectedSongs={selectedSongs}/>
+            <Sidebar selectedSongs={selectedSongs} />
           </aside>
           <div className="w-full px-20 relative max-sm:px-2">
             <Outlet context={{ selectedSongs, setSelectedSongs, setCurrentSong }} />
           </div>
         </div>
         {currentSong && (
-          <Playbar song={currentSong} />
+          <Playbar song={currentSong} onEnd={()=>setCurrentSong(null)} />
         )}
       </LayoutContext.Provider>
     </section>

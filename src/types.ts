@@ -1,3 +1,11 @@
+import type { Dispatch, SetStateAction } from "react";
+
+export interface OutletContextType {
+  selectedSongs: selectedSongs[],
+  setSelectedSongs: Dispatch<SetStateAction<selectedSongs[]>>,
+  setCurrentSong: Dispatch<SetStateAction<selectedSongs | null>>
+}
+
 export interface downloadTypes {
     title: string;
     audio: string;
@@ -9,12 +17,14 @@ export interface Songtypes {
     index: string
     id: string;
     name: string;
+    title:string;
+    duration:number;
     album?: {id:string};
     year?: string;
     primaryArtists?: string;
     image: { url: string }[];
     downloadUrl: { url: string }[]
-    artists: string[];
+    artists: {all:Artist[]};
 }
 
 export interface AlbumItenary {
@@ -54,6 +64,7 @@ export interface selectedSongs {
     id?: string;
     image?: string;
     artist?:string
+    duration?:number
 }
 
 export interface albumsTypes {

@@ -52,6 +52,7 @@ const AlbumsPage = () => {
       artist: song.artists?.all[0].name,
       title: song.title || song.name,
       audio: song.downloadUrl[4].url,
+      duration: song.duration || 0,
       id: song.id,
       image: song.image?.[2]?.url || ""
     };
@@ -62,9 +63,9 @@ const AlbumsPage = () => {
     <section className="relative flex max-sm:flex-col max-sm:min-h-screen">
       <div className="fixed p-30 top-15 z-20 max-sm:p-20 max-sm:w-full max-sm:backdrop-blur-[5px] max-sm:top-5">
         {albumData?.image?.[2]?.url && (
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-2">
             <img className="w-[24em] rounded-2xl shadow-lg shadow-cream" src={albumData.image[2].url} alt="" />
-            <span className="text-white text-center">{ProperTitle(albumData.name)}</span>
+            <span className="text-white text-center text-sm">{ProperTitle(albumData.name)}</span>
           </div>
         )}
       </div>

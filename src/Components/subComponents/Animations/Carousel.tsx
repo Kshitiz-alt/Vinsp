@@ -29,12 +29,13 @@ const Carousel = () => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % playlists.length)
     }, 3000)
+    
     return () => clearInterval(interval)
 
   }, [playlists])
 
   return (
-    <section className="w-full overflow-hidden py-20 p-5 max-sm:py-25">
+    <section className="w-full overflow-hidden py-22 p-5 max-sm:py-25">
       <div className="w-full">
         <motion.div
           className="flex gap-9"

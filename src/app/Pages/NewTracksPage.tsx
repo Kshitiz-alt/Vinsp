@@ -40,7 +40,7 @@ const NewTracksPage = () => {
             title={songData.name}
             image={songData.image[2].url}
             audio={songData.downloadUrl[4].url}
-            artist={songData.artists[0]}
+            artist={songData.artists.all[0].name}
             onSelect={(song, isChecked) => {
               const songSet = {
                 title: song.title,
