@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
-import { useTranslation } from "react-i18next"
-import { LuEarth } from "react-icons/lu"
+import { motion } from 'framer-motion';
+import { useTranslation } from "react-i18next";
+import { LuEarth } from "react-icons/lu";
 
 
 const Languages = [
@@ -25,6 +25,6 @@ const Langbtn = () => {
             <LuEarth className="cursor-pointer" size={23} />
         </motion.div>
     )
-}
+};
 
-export default Langbtn
+export default Langbtn;

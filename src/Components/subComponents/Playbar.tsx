@@ -1,23 +1,33 @@
 
-import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useRef, useState } from "react"
-import type { PlayProps } from "../../types"
-import { ProperTitle } from '../../Constants/Fetch'
-import { useLayoutContext } from '../../Constants/Context'
-import { LuPause, LuPlay } from 'react-icons/lu'
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef, useState} from "react";
+import type { PlayProps } from "../../types";
+import { ProperTime, ProperTitle } from '../../Constants/Fetch';
+import { useLayoutContext } from '../../Constants/Context';
+import { LuPause, LuPlay } from 'react-icons/lu';
+import { BiVolumeFull, BiVolumeLow } from 'react-icons/bi';
 
 
 
 
-const Playbar = ({ song, onEnd }: PlayProps) => {
 
-    const audioRef = useRef<HTMLAudioElement>(null)
-    const [extendPlayer, setExtendPlayer] = useState(false)
-    const [duration, setDuration] = useState(0)
-    const [currentTime, setCurrentTime] = useState(0)
-    const [isPlaying,setPlaying] = useState(false)
-    const { extend } = useLayoutContext()
 
+const Playbar = ({ song, onEnd , setSelectedSong}: PlayProps) => {
+
+    //State handling
+    const audioRef = useRef<HTMLAudioElement>(null);
+    const [extendPlayer, setExtendPlayer] = useState(false);
+    const [duration, setDuration] = useState(0);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [isPlaying, setPlaying] = useState(false);
+    const [volume, SetVolume] = useState(1)
+
+
+    //Child component handling
+    const { extend } = useLayoutContext();
+
+
+    //Mounts when the player extends - fallback
     useEffect(() => {
         if (extendPlayer) {
             const timeout = setTimeout(() => setExtendPlayer(false), 10000)
@@ -25,38 +35,40 @@ const Playbar = ({ song, onEnd }: PlayProps) => {
         }
     }, [extendPlayer, song]);
 
+    //Fetching data through audioRef for Audio data
     useEffect(() => {
         const audio = audioRef.current;
         if (audio && song.audio) {
-            audio.play()
             audio.src = song.audio;
-            audio.load()
             setDuration(0);
             setCurrentTime(0);
-            setPlaying(false)
+            setPlaying(false);
         }
 
         return () => {
-            if(audio){
+            if (audio) {
                 audio.pause()
             }
         }
-    }, [song])
+    }, [song]);
 
+    //Fallback when the data becomes null
     useEffect(() => {
 
         const audio = audioRef.current;
         if (!audio) return;
         const handleEnd = () => {
-            setPlaying(false)
+            setPlaying(false);
             onEnd();
         }
-
         audio.addEventListener("ended", handleEnd);
         return () => audio.removeEventListener("ended", handleEnd)
 
-    }, [onEnd])
+    }, [onEnd]);
 
+
+    //Handlers
+    //handle to update prev song to next song
     const handleUpdate = () => {
         const audio = audioRef.current;
         if (audio) {
@@ -65,26 +77,44 @@ const Playbar = ({ song, onEnd }: PlayProps) => {
         }
     }
 
+    //handle to play song
     const onPlayHandle = () => {
         const audio = audioRef.current;
-        if(!audio) return;
+        if (!audio) return;
 
-        if(isPlaying){
+        if (isPlaying) {
             audio.pause()
             setPlaying(false)
-        }else{
+        } else {
             audio
-            .play()
-            .then(()=> setPlaying(true))
+                .play()
+                .then(() => setPlaying(true))
         }
-    }
+    };
 
+    //handle for rendering the currentTime
     const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
         const audio = audioRef.current;
         if (audio) {
             audio.currentTime = Number(e.target.value);
         }
     };
+
+    //Volume handlers
+    const VolumeUp = () => {
+        if (audioRef.current) {
+            const vol = Math.min(1, volume + 0.1)
+            audioRef.current.volume = vol
+            SetVolume(vol)
+        }
+    }
+    const VolumeDown = () => {
+        if (audioRef.current) {
+            const vol = Math.max(0, volume - 0.1);
+            audioRef.current.volume = vol
+            SetVolume(vol)
+        }
+    }
 
 
     return (
@@ -97,9 +127,9 @@ const Playbar = ({ song, onEnd }: PlayProps) => {
                 transition={{ duration: 1, type: "tween" }}
 
 
-                className={`fixed  z-40 bg-Gray/50 backdrop-blur-2xl inset-shadow-2xs inset-shadow-cream h-18 p-3 rounded-full flex items-center gap-2 transition-all duration-200 ease-in-out
-                    ${extendPlayer ? "w-1/2 cursor-default" : "w-18 cursor-pointer"}
-                    ${extend ? "bottom-10 right-20" : "bottom-10 left-20"}
+                className={`fixed z-40 bg-Gray/50 backdrop-blur-2xl inset-shadow-2xs inset-shadow-cream h-18 p-3 rounded-full flex items-center gap-2 transition-all duration-200 ease-in-out
+                    ${extendPlayer ? "w-7/12 cursor-default max-sm:w-11/12" : "w-18 cursor-pointer"}
+                    ${extend ? "bottom-10 right-20" : "bottom-10 left-20 max-sm:left-3"}
                     `}
                 onClick={() => {
                     setExtendPlayer(!extendPlayer)
@@ -109,46 +139,95 @@ const Playbar = ({ song, onEnd }: PlayProps) => {
             >
                 <img className="w-12 rounded-full shadow-2xs shadow-cream" src={song.image} alt="" />
                 {extendPlayer && (
-                    <div className='flex gap-10'>
-                        <motion.div
+                    <div className='flex gap-5 max-sm:gap-3'>
+                        <div className='flex max-sm:flex-col max-sm:gap-2'>
+
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 2 }}
+                                className="flex flex-col">
+                                <p className="text-white w-96 max-sm:w-30 max-sm:line-clamp-1 max-sm:text-sm">{ProperTitle(song.title)}</p>
+                                <span className='text-cream max-sm:text-[12px]'>{song.artist}</span>
+                            </motion.div>
+                            <motion.div
+                                className='flex items-center gap-3 text-white text-[12px]'
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 2 }}
+                            >
+                                <span className='max-sm:hidden'>{ProperTime(currentTime)}</span>
+
+                                <input
+                                    className='cursor-pointer rangeSM'
+                                    type="range"
+                                    min={0}
+                                    max={duration || 0}
+                                    value={currentTime}
+                                    onChange={handleSeek}
+                                />
+                                <span className='max-sm:hidden'>{ProperTime(duration)}</span>
+                            </motion.div>
+                        </div>
+
+                        <motion.button
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration:2}}
-                            className="flex flex-col">
-                            <p className="text-white w-96">{ProperTitle(song.title)}</p>
-                            <span className='text-cream'>{song.artist}</span>
-                        </motion.div>
-                        <motion.input
-                            className='cursor-pointer'
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration:2}}
-                            type="range"
-                            min={0}
-                            max={duration || 0}
-                            value={currentTime}
-                            onChange={handleSeek}
-                        />
-                        <motion.button 
-                        initial={{opacity:0}}
-                        animate={{opacity:1}}
-                        exit={{opacity:0}}
-                        transition={{duration:2}}
-                        onClick={(e)=>{
-                            e.stopPropagation()
-                            onPlayHandle()}} className='cursor-pointer text-white'>
-                            {isPlaying ?  <LuPause size={25}/> : <LuPlay size={25}/>}
+                            transition={{ duration: 2 }}
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                onPlayHandle()
+                            }} className='cursor-pointer text-white'>
+                            {isPlaying ? <LuPause size={25} /> : <LuPlay size={25} />}
                         </motion.button>
+                        <input type='checkbox'
+                            onChange={(e) => {
+                                const isChecked = e.target.checked;
+
+                                const songSet = {
+                                    title: song.title,
+                                    audio: song.audio,
+                                    image: song.image
+                                }
+
+                                setSelectedSong((prev) => {
+                                    if (isChecked) return [...prev, songSet];
+                                    return prev.filter((s) => s.audio !== songSet.audio);
+                                });
+                            }}
+
+                        />
+
+
+
+
+                        {/*Hidden for Phone users*/}
+                        <button
+                            className='cursor-pointer max-sm:hidden'
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                VolumeUp()
+                            }}>
+
+                            <BiVolumeFull size={30} className='hover:text-cream' />
+                        </button>
+                        <button
+                            className='cursor-pointer max-sm:hidden'
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                VolumeDown()
+                            }}>
+                            <BiVolumeLow size={30} className='hover:text-cream' />
+                        </button>
                     </div>
                 )}
                 <audio ref={audioRef} autoPlay className='bg-white w-60' onTimeUpdate={handleUpdate} onLoadedMetadata={handleUpdate}></audio>
             </motion.figure>
-
-
         </AnimatePresence>
     )
 }
 
-export default Playbar
+export default Playbar;

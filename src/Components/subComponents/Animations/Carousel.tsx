@@ -36,7 +36,7 @@ const Carousel = () => {
 
   return (
     <section className="w-full overflow-hidden py-22 p-5 max-sm:py-25">
-      <div className="w-full">
+
         <motion.div
           className="flex gap-9"
           animate={{ x: `-${currentIndex * 304}px` }}
@@ -60,7 +60,6 @@ const Carousel = () => {
             </Link>
           ))}
         </motion.div>
-      </div>
     </section>
   )
 }

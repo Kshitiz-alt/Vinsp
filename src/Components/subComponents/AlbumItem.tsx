@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import type { AlbumItenary } from "../../types"
 import Artist from "./Animations/Artist"
 import { LuMicVocal } from "react-icons/lu"
-import { ProperTitle } from "../../Constants/Fetch"
+import { ProperTime, ProperTitle } from "../../Constants/Fetch"
 
 const AlbumItem = ({ duration, artists, onSelect, title, audio, image, isCurrent,  onAudioPlay }: AlbumItenary) => {
 
@@ -40,7 +40,7 @@ const AlbumItem = ({ duration, artists, onSelect, title, audio, image, isCurrent
 
     return (
         <>
-                <div ref={hoverRef} className="p-3  hover:bg-cream border overflow-hidden border-cream rounded-2xl transition-all duration-150 ease-in-out cursor-pointer flex max-sm:gap-0 max-sm:text-[10px]" onClick={() => handleWithAudio()}>
+                <div ref={hoverRef} className="p-3  hover:bg-cream border overflow-hidden border-cream rounded-2xl transition-all duration-150 ease-in-out cursor-pointer flex gap-5 max-sm:gap-0 max-sm:text-[10px]" onClick={() => handleWithAudio()}>
                     <figure className="flex max-sm:flex-col gap-2">
                         <p
                             onMouseEnter={() => setHover(true)}
@@ -54,7 +54,7 @@ const AlbumItem = ({ duration, artists, onSelect, title, audio, image, isCurrent
                             <Artist artists={artists} />
                         </div>
                     </figure>
-                    <span className="max-sm:text-cream mr-40">{Math.ceil(duration / 60)}mins</span>
+                    <span className="max-sm:text-cream">{ProperTime(duration)} mins</span>
                     <input
                         className="h-4 w-4 mt-1 appearance-none bg-white checked:rounded-full checked:bg-green-300 transition-all duration-300 ease-in-out rounded-[3px]"
                         type="checkbox"

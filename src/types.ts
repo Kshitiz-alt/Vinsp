@@ -1,9 +1,9 @@
 import type { Dispatch, SetStateAction } from "react";
 
 export interface OutletContextType {
-  selectedSongs: selectedSongs[],
-  setSelectedSongs: Dispatch<SetStateAction<selectedSongs[]>>,
-  setCurrentSong: Dispatch<SetStateAction<selectedSongs | null>>
+    selectedSongs: selectedSongs[],
+    setSelectedSongs: Dispatch<SetStateAction<selectedSongs[]>>,
+    setCurrentSong: Dispatch<SetStateAction<selectedSongs | null>>
 }
 
 export interface downloadTypes {
@@ -17,14 +17,14 @@ export interface Songtypes {
     index: string
     id: string;
     name: string;
-    title:string;
-    duration:number;
-    album?: {id:string};
+    title: string;
+    duration: number;
+    album?: { id: string };
     year?: string;
     primaryArtists?: string;
     image: { url: string }[];
     downloadUrl: { url: string }[]
-    artists: {all:Artist[]};
+    artists: { all: Artist[] };
 }
 
 export interface AlbumItenary {
@@ -34,16 +34,16 @@ export interface AlbumItenary {
     image: string;
     artists: string[];
     isCurrent: boolean;
-    onAudioPlay : (ref:HTMLAudioElement) => void;
+    onAudioPlay: (ref: HTMLAudioElement) => void;
     onSelect?: (song: { title: string, audio: string, image: string }, isChecked: boolean) => void;
 }
 
 type Artist = {
-  id: string
-  name: string
-  role: string
-  type: string
-  image: {url:string}[]
+    id: string
+    name: string
+    role: string
+    type: string
+    image: { url: string }[]
 }
 
 
@@ -55,7 +55,7 @@ export interface AlbumItemTypes {
     downloadUrl: { url: string }[]
     audio: string
     duration: number
-    artists: {all: Artist[]}
+    artists: { all: Artist[] }
 }
 
 export interface selectedSongs {
@@ -63,8 +63,8 @@ export interface selectedSongs {
     audio: string
     id?: string;
     image?: string;
-    artist?:string
-    duration?:number
+    artist?: string
+    duration?: number
 }
 
 export interface albumsTypes {
@@ -85,47 +85,48 @@ export interface artistTypes {
 }
 
 export interface artistStateTypes {
-    duration:number;
-    id:string;
-    name:string;
-    language:string;
-    artists:{all:Artist[]}
+    duration: number;
+    id: string;
+    name: string;
+    language: string;
+    artists: { all: Artist[] }
 }
 
 export interface SearchTypes {
-    image?:{url:string}[];
-    duration:number;
-    id:string
-    name:string;
-    title:string;
-    value?:string;
-    artists?:{all:Artist[]}
-    downloadUrl:{url:string}[]
+    image?: { url: string }[];
+    duration: number;
+    id: string
+    name: string;
+    title: string;
+    value?: string;
+    artists?: { all: Artist[] }
+    downloadUrl: { url: string }[]
 }
 
 export interface SearchAlbumTypes {
-    image?:{url:string}[];
-    name:string;
-    title:string
-    id:string;
-    artist?:string
-    length:number
+    image?: { url: string }[];
+    name: string;
+    title: string
+    id: string;
+    artist?: string
+    length: number
 }
 
-export interface SearchArtistTypes{
-    id:string;
-    description:string;
-    image?:{url:string}[];
-    title:string
+export interface SearchArtistTypes {
+    id: string;
+    description: string;
+    image?: { url: string }[];
+    title: string
 }
 
-export interface playbarTypes{
-    song:string;
-    title:string;
-    downloadUrl:{url:string}
+export interface playbarTypes {
+    song: string;
+    title: string;
+    downloadUrl: { url: string }
 }
 
-export interface PlayProps{
+export interface PlayProps {
     song: selectedSongs;
     onEnd: () => void;
+    setSelectedSong: Dispatch<SetStateAction<selectedSongs[]>>
 }

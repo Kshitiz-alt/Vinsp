@@ -1,20 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Wellfleet&display=swap");
 @import "tailwindcss";
 
-:root{
+:root {
   background: black;
 }
 
 @theme {
-  --color-background:#000000;
-  --color-cream:#ffa2a2;
-  --color-Gray:#6a7282; 
-  --color-HovBlue:oklch(70.7% 0.165 254.624)
+  --color-background: #000000;
+  --color-cream: #ffa2a2;
+  --color-Gray: #6a7282;
+  --color-HovBlue: oklch(70.7% 0.165 254.624);
 }
 
 html,
 body {
- 
   font-family: Wellfleet;
   ::-webkit-scrollbar {
     width: 5px;
@@ -24,7 +23,7 @@ body {
     border-radius: 20px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color:var(--color-cream);
+    background-color: var(--color-cream);
     border-radius: 10px;
   }
 }
@@ -32,9 +31,25 @@ body {
 @layer utilities {
   .Scroll {
     scrollbar-width: none;
-    &::-webkit-scrollbar{
+    &::-webkit-scrollbar {
       display: none;
     }
   }
+  .wordSpacing {
+    word-spacing: 3px;
+  }
 }
 
+@layer components {
+  @media (max-width: 640px) {
+     input[type='range'].rangeSM::-webkit-slider-thumb {
+      margin-top: -6px;
+      appearance: none;
+    }
+
+    input[type="range"].rangeSM::-webkit-slider-runnable-track {
+      height: 3px;
+      background: var(--color-cream);
+    }
+  }
+}

@@ -41,7 +41,7 @@ const NewTracksSub = () => {
     <section className="max-sm:w-74">
       <div className="flex justify-between items-center max-sm:bg-cream/40 max-sm:p-1 rounded-[5px]">
         <h1 className="text-white text-2xl max-sm:text-lg">{t('newTracks')}</h1>
-        <Link to="/newtracks" className="text-white text-lg tracking-wide cursor-pointer opacity-70 hover:opacity-100 max-sm:text-sm">{t('showall')}</Link>
+        <Link to="/" className="text-white text-lg tracking-wide cursor-pointer opacity-70 hover:opacity-100 max-sm:text-sm">{t('showall')}</Link>
       </div>
       <div className=" gap-10 max-sm:gap-35 p-5 grid grid-cols-5 max-sm:overflow-x-scroll">
         {playlists.map((tracks) => (

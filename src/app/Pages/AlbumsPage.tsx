@@ -1,14 +1,9 @@
-import { useEffect, useState, type Dispatch, type SetStateAction } from "react"
+import { useEffect, useState} from "react"
 import { useOutletContext, useParams } from "react-router-dom"
 import { ALBUMS, ProperTitle } from "../../Constants/Fetch"
-import type { AlbumItemTypes, albumsTypes, SearchTypes, selectedSongs } from "../../types"
+import type { AlbumItemTypes, albumsTypes, OutletContextType, SearchTypes, selectedSongs } from "../../types"
 import AlbumItem from "../../Components/subComponents/AlbumItem"
 
-type OutletContextType = {
-  selectedSongs: selectedSongs[]
-  setSelectedSongs: Dispatch<SetStateAction<selectedSongs[]>>
-  setCurrentSong: Dispatch<SetStateAction<selectedSongs | null>>
-}
 
 
 const AlbumsPage = () => {

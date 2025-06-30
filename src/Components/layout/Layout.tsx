@@ -28,7 +28,7 @@ const Layout = () => {
           </div>
         </div>
         {currentSong && (
-          <Playbar song={currentSong} onEnd={()=>setCurrentSong(null)} />
+          <Playbar song={currentSong} onEnd={()=>setCurrentSong(null)} setSelectedSong={setSelectedSongs} />
         )}
       </LayoutContext.Provider>
     </section>
