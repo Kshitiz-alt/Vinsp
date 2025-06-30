@@ -51,7 +51,7 @@ const SearchPage = () => {
 
   return (
     <section className="relative top-20 w-full h-[83.4vh] justify-center overflow-hidden bg-Gray/10 rounded-2xl max-sm:h-full">
-      <h1 className="text-white text-2xl p-4 max-sm:text-sm">{t("searchquery")}<span className="text-cream px-3">{query}</span> </h1>
+      <h1 className="text-white text-2xl p-4 max-sm:text-[12px]">{t("searchquery")}<span className="text-cream px-3">{query}</span> </h1>
       <section className="flex pr-4 gap-30 max-sm:flex-col max-sm:gap-15">
         <div className="w-1/2 flex flex-col items-center gap-3 py-1 px-5 max-sm:w-full">
           {albumState && (
