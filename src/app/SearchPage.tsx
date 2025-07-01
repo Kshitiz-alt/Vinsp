@@ -73,7 +73,7 @@ const SearchPage = () => {
             </Link>
           )}
         </div>
-        <aside className="w-1/2  space-y-4 overflow-y-scroll overflow-x-hidden h-[72vh] bg-blend-color max-sm:w-full max-sm:px-4 md:w-full md:gap-5 md:grid md:grid-cols-2 md:px-5 xl:grid-cols-1 xl:w-1/2 xl:px-0 ">
+        <aside className="w-1/2  space-y-4 overflow-y-scroll overflow-x-hidden h-[72vh] bg-blend-color max-sm:w-full max-sm:px-4 md:w-full md:gap-5 md:grid md:grid-cols-2 md:px-5 xl:grid-cols-1 xl:w-1/2 xl:px-0 xl:gap-1.5 ">
           {searched.map((element, index) => (
             <div className="justify-between bg-Gray/10 p-2 rounded-2xl hover:bg-cream/10 cursor-pointer" key={index} onClick={() => handlePlay(element)}>
               <figure className="flex gap-2">
