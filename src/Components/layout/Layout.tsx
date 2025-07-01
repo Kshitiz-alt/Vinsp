@@ -23,7 +23,7 @@ const Layout = () => {
           <aside className="">
             <Sidebar selectedSongs={selectedSongs} />
           </aside>
-          <div className="w-full px-20 relative max-sm:px-2">
+          <div className="w-full px-20 relative max-sm:px-3 md:px-15">
             <Outlet context={{ selectedSongs, setSelectedSongs, setCurrentSong }} />
           </div>
         </div>

@@ -55,16 +55,16 @@ const AlbumsPage = () => {
 
   }
   return (
-    <section className="relative flex max-sm:flex-col max-sm:min-h-screen">
-      <div className="fixed p-30 top-15 z-20 max-sm:p-20 max-sm:w-full max-sm:backdrop-blur-[5px] max-sm:top-5">
+    <section className="relative flex xl:flex-row max-sm:flex-col max-sm:min-h-screen md:min-h-screen md:flex-col">
+      <div className="fixed top-15 z-20 max-sm:p-20 max-sm:w-full max-sm:h-1/2 max-sm:backdrop-blur-[5px] max-sm:top-5 md:p-5 md:backdrop-blur-[5px] xl:p-30 xl:backdrop-blur-none">
         {albumData?.image?.[2]?.url && (
-          <div className="flex flex-col gap-2">
-            <img className="w-[24em] rounded-2xl shadow-lg shadow-cream" src={albumData.image[2].url} alt="" />
-            <span className="text-white text-center text-sm">{ProperTitle(albumData.name)}</span>
+          <div className="flex xl:flex-col max-sm:flex-col gap-2 md:flex-row">
+            <img className="xl:w-[384px] rounded-2xl shadow-lg max-sm:w-full shadow-cream md:w-1/4" src={albumData.image[2].url} alt="" />
+            <span className="text-white text-center xl:text-sm max-sm:text-sm md:text-2xl">{ProperTitle(albumData.name)}</span>
           </div>
         )}
       </div>
-      <aside className="ml-[45em] flex flex-col gap-4 py-50 relative max-sm:ml-0 max-sm:mt-52">
+      <aside className="flex flex-col gap-4 py-50 relative max-sm:ml-0 max-sm:mt-52 md:ml-0 md:mt-30 xl:ml-[45em] xl:mt-0">
         {albumItem.map((element) => (
           <AlbumItem
             key={element.id}

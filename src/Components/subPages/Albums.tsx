@@ -33,16 +33,16 @@ const Albums = () => {
   const { t } = useTranslation()
 
   return (
-    <section className="max-sm:w-74">
+    <section className="w-full">
       <div className="flex justify-between max-sm:bg-cream/40 max-sm:p-1 rounded-[5px]">
         <h1 className="text-white text-2xl max-sm:text-lg">{t('hitAlbums')}</h1>
       </div>
-      <div className="grid grid-cols-5 gap-7 p-5 max-sm:gap-35 overflow-x-scroll">
+      <div className="grid grid-cols-5 gap-7 p-5 xl:gap-10 max-sm:gap-35 md:gap-55 overflow-x-scroll">
         {albums.map((album) => (
           <Link to={`/albums/${album.id}`} key={album.id} >
             <motion.img
               whileHover={{ scale: 1.05 }}
-              className="min-w-0 h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:max-w-32 max-sm:max-h-32"
+              className="xl:w-[400px] xl:h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:max-w-32 max-sm:max-h-32 md:min-w-45 md:min-h-45"
               src={album.image?.[2]?.url}
               alt="" />
           </Link>

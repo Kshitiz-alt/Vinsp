@@ -52,4 +52,15 @@ body {
       background: var(--color-cream);
     }
   }
+   @media (max-width: 768px) {
+     input[type='range'].rangeSM::-webkit-slider-thumb {
+      margin-top: -6px;
+      appearance: none;
+    }
+
+    input[type="range"].rangeSM::-webkit-slider-runnable-track {
+      height: 3px;
+      background: var(--color-cream);
+    }
+  }
 }

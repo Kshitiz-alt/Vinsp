@@ -35,7 +35,7 @@ const Carousel = () => {
   }, [playlists])
 
   return (
-    <section className="w-full overflow-hidden py-22 p-5 max-sm:py-25">
+    <section className="w-full overflow-hidden rounded-3xl py-22 p-5 max-sm:py-25 md:p-22">
 
         <motion.div
           className="flex gap-9"
@@ -46,7 +46,7 @@ const Carousel = () => {
             <Link to={`/albums/${song.album?.id}`} key={song.id}>
               <motion.div
 
-                className="w-[420px] h-[240px] rounded-xl overflow-hidden shadow-lg max-sm:w-[270px] max-sm:max-h-52 "
+                className="w-[420px] xl:w-[420px] h-[240px] rounded-xl overflow-hidden shadow-lg max-sm:w-[270px] max-sm:max-h-52 md:max-h-48 md:w-[240px]"
                 initial={{ opacity: .8 }}
                 whileHover={{ scale: 1.05, opacity: 10 }}
                 whileTap={{ scale: 0.95 }}

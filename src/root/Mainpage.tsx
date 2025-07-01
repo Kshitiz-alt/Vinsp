@@ -5,9 +5,9 @@ import ArtistsSub from "../Components/subPages/ArtistsSub"
 
 const Mainpage = () => {
   return (
-    <section className="h-[96.8svh] max-sm:w-screen">
+    <section className="h-[96.8svh] max-sm:min-w-0 w-full">
       <Carousel />
-      <div className="absolute flex-col top-1/2 p-1 min-w-10/12">
+      <div className="absolute flex-col top-1/2 p-1 w-11/12 md:px-4">
           <NewTracksSub />
           <Albums />
           <ArtistsSub/>

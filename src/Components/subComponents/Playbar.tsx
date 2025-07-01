@@ -1,6 +1,6 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import type { PlayProps } from "../../types";
 import { ProperTime, ProperTitle } from '../../Constants/Fetch';
 import { useLayoutContext } from '../../Constants/Context';
@@ -12,7 +12,7 @@ import { BiVolumeFull, BiVolumeLow } from 'react-icons/bi';
 
 
 
-const Playbar = ({ song, onEnd , setSelectedSong}: PlayProps) => {
+const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
 
     //State handling
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -128,8 +128,8 @@ const Playbar = ({ song, onEnd , setSelectedSong}: PlayProps) => {
 
 
                 className={`fixed z-40 bg-Gray/50 backdrop-blur-2xl inset-shadow-2xs inset-shadow-cream h-18 p-3 rounded-full flex items-center gap-2 transition-all duration-200 ease-in-out
-                    ${extendPlayer ? "w-7/12 cursor-default max-sm:w-11/12" : "w-18 cursor-pointer"}
-                    ${extend ? "bottom-10 right-20" : "bottom-10 left-20 max-sm:left-3"}
+                    ${extendPlayer ? "xl:w-7/12 cursor-default max-sm:w-11/12 md:w-8/12" : "w-18 cursor-pointer"}
+                    ${extend ? "bottom-10 right-20" : "bottom-10 xl:left-20 max-sm:left-3 md:left-5"}
                     `}
                 onClick={() => {
                     setExtendPlayer(!extendPlayer)
@@ -139,17 +139,16 @@ const Playbar = ({ song, onEnd , setSelectedSong}: PlayProps) => {
             >
                 <img className="w-12 rounded-full shadow-2xs shadow-cream" src={song.image} alt="" />
                 {extendPlayer && (
-                    <div className='flex gap-5 max-sm:gap-3'>
-                        <div className='flex max-sm:flex-col max-sm:gap-2'>
-
+                    <div className='flex xl:gap-5 max-sm:gap-3 md:gap-5 items-center'>
+                        <div className='flex xl:flex-row max-sm:flex-col md:flex-col max-sm:gap-2 md:gap-2'>
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 2 }}
                                 className="flex flex-col">
-                                <p className="text-white w-96 max-sm:w-30 max-sm:line-clamp-1 max-sm:text-sm">{ProperTitle(song.title)}</p>
-                                <span className='text-cream max-sm:text-[12px]'>{song.artist}</span>
+                                <p className="text-white xl:text-lg xl:w-96 max-sm:w-30 md:w-70 max-sm:line-clamp-1 md:line-clamp-1 max-sm:text-sm md:text-sm">{ProperTitle(song.title)}</p>
+                                <span className='text-cream xl:text-sm max-sm:text-[12px] md:text-[12px]'>{song.artist}</span>
                             </motion.div>
                             <motion.div
                                 className='flex items-center gap-3 text-white text-[12px]'
@@ -158,17 +157,17 @@ const Playbar = ({ song, onEnd , setSelectedSong}: PlayProps) => {
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 2 }}
                             >
-                                <span className='max-sm:hidden'>{ProperTime(currentTime)}</span>
+                                <span className='xl:flex xl:text-nowrap max-sm:hidden md:hidden'>{ProperTime(currentTime)}</span>
 
                                 <input
-                                    className='cursor-pointer rangeSM'
+                                    className='cursor-pointer xl:w-full rangeSM md:w-3/4'
                                     type="range"
                                     min={0}
                                     max={duration || 0}
                                     value={currentTime}
                                     onChange={handleSeek}
                                 />
-                                <span className='max-sm:hidden'>{ProperTime(duration)}</span>
+                                <span className='xl:flex xl:text-nowrap max-sm:hidden md:hidden'>{ProperTime(duration)}</span>
                             </motion.div>
                         </div>
 
@@ -183,8 +182,11 @@ const Playbar = ({ song, onEnd , setSelectedSong}: PlayProps) => {
                             }} className='cursor-pointer text-white'>
                             {isPlaying ? <LuPause size={25} /> : <LuPlay size={25} />}
                         </motion.button>
-                        <input type='checkbox'
+                        <input
+                            className="h-4 w-4 appearance-none bg-white checked:rounded-full checked:bg-green-300 transition-all duration-300 ease-in-out rounded-[3px]"
+                            type='checkbox'
                             onChange={(e) => {
+                                e.stopPropagation()
                                 const isChecked = e.target.checked;
 
                                 const songSet = {
@@ -206,7 +208,7 @@ const Playbar = ({ song, onEnd , setSelectedSong}: PlayProps) => {
 
                         {/*Hidden for Phone users*/}
                         <button
-                            className='cursor-pointer max-sm:hidden'
+                            className='cursor-pointer xl:flex max-sm:hidden md:hidden'
                             onClick={(e) => {
                                 e.stopPropagation()
                                 VolumeUp()
@@ -215,7 +217,7 @@ const Playbar = ({ song, onEnd , setSelectedSong}: PlayProps) => {
                             <BiVolumeFull size={30} className='hover:text-cream' />
                         </button>
                         <button
-                            className='cursor-pointer max-sm:hidden'
+                            className='cursor-pointer xl:flex max-sm:hidden md:hidden'
                             onClick={(e) => {
                                 e.stopPropagation()
                                 VolumeDown()

@@ -34,8 +34,8 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="w-full fixed flex p-4 z-40 backdrop-blur-sm max-sm:h-16 max-sm:bg-cream/40 max-sm:backdrop-blur-sm">
-                <Link to="/" className="text-white bg-black/10 backdrop-blur-2xl text-4xl text-nowrap p-1.5 rounded-xl tracking-wider max-sm:hidden">M2 CONNECT</Link>
+            <nav className="w-full fixed flex p-4 z-40 backdrop-blur-sm max-sm:h-16  max-sm:bg-cream/40 max-sm:backdrop-blur-sm md:h-16 xl:h-20">
+                <Link to="/" className="text-white bg-black/10 backdrop-blur-2xl xl:text-4xl text-nowrap p-1.5 rounded-xl tracking-wider max-sm:hidden md:text-lg">M2 CONNECT</Link>
                 <header className="flex gap-4 justify-end w-full">
                     {/*Search bar */}
                     <AnimatePresence>

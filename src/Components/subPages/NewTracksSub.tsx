@@ -38,17 +38,17 @@ const NewTracksSub = () => {
   
   
   return (
-    <section className="max-sm:w-74">
+    <section className="w-full">
       <div className="flex justify-between items-center max-sm:bg-cream/40 max-sm:p-1 rounded-[5px]">
         <h1 className="text-white text-2xl max-sm:text-lg">{t('newTracks')}</h1>
         <Link to="/" className="text-white text-lg tracking-wide cursor-pointer opacity-70 hover:opacity-100 max-sm:text-sm">{t('showall')}</Link>
       </div>
-      <div className=" gap-10 max-sm:gap-35 p-5 grid grid-cols-5 max-sm:overflow-x-scroll">
+      <div className="xl:gap-10 max-sm:gap-35 min-md:gap-55 p-5 grid grid-cols-5 overflow-x-scroll">
         {playlists.map((tracks) => (
           <motion.img 
           onClick={()=>handlePlay(tracks)}
           whileHover={{scale:1.05}}
-          className="min-w-0 h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:max-h-32 max-sm:max-w-32" 
+          className="xl:w-[400px] xl:h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:max-h-32 max-sm:max-w-32 md:min-w-45 md:min-h-45" 
           key={tracks.id} 
           src={tracks.image[2].url} 
           alt="songImage" />
