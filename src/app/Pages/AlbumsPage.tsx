@@ -55,7 +55,7 @@ const AlbumsPage = () => {
 
   }
   return (
-    <section className="relative flex xl:flex-row max-sm:flex-col max-sm:min-h-screen md:min-h-screen md:flex-col">
+    <section className="relative flex xl:flex-row max-sm:flex-col max-sm:min-h-[100svh] md:min-h-[100svh] md:flex-col">
       <div className="fixed top-15 z-20 max-sm:p-20 max-sm:w-full max-sm:h-1/2 max-sm:backdrop-blur-[5px] max-sm:top-5 md:p-5 md:backdrop-blur-[5px] xl:p-30 xl:backdrop-blur-none">
         {albumData?.image?.[2]?.url && (
           <div className="flex xl:flex-col max-sm:flex-col gap-2 md:flex-row">

@@ -40,7 +40,9 @@ const Navbar = () => {
                     {/*Search bar */}
                     <AnimatePresence>
                         <motion.div key="git-icon" whileTap={{ rotate: 90 }} className="flex items-center gap-2 p-3 px-3 bg-gradient-to-r from-white to-white/70 border-2 focus-within:border-purple-500 rounded-full cursor-pointer">
+                        <Link to="https://github.com/Kshitiz-alt/M2-remastered">
                             <BiLogoGithub size={23} />
+                        </Link>
                         </motion.div>
                     </AnimatePresence>
                     <motion.div

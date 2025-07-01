@@ -68,7 +68,7 @@ const SearchPage = () => {
               <img className="max-w-1/3 rounded-2xl" src={artistData.image?.[2].url} alt="" />
               <div className="flex flex-col">
                 <p className="text-white xl:text-2xl max-sm:text-sm md:text-[12px]">{artistData.title}</p>
-                <span className="text-cream/70 xl:*:text-sm max-sm:text-[12px] md:text-[10px]">{artistData.description}</span>
+                <span className="text-cream/70 xl:text-sm max-sm:text-[12px] md:text-[10px]">{artistData.description}</span>
               </div>
             </Link>
           )}
