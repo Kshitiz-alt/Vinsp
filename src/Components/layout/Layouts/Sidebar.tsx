@@ -13,15 +13,15 @@ type siderbarProps = {
 const Sidebar = ({ selectedSongs }: siderbarProps) => {
   const { t } = useTranslation()
   const { extend,setExtend} = useLayoutContext()
-
+  
   console.log("Selected Songs in Sidebar:", selectedSongs)
-
+  
   const downloadHandle = () => {
     Download(selectedSongs)
   }
 
   return (
-    <section className={`fixed top-20 z-30 bg-gray-500/10 rounded-r-2xl  h-10/12 overflow-y-auto Scroll transition-all ease-in-out max-sm:w-0  ${extend ? "px-10 xl:w-3/12  bg-gray-900/95 md:w-5/12 " : "justify-center"}`}>
+    <section className={`fixed top-20 z-30 bg-gray-500/10 rounded-r-2xl  h-10/12 overflow-y-auto Scroll transition-all ease-in-out max-sm:w-0  ${extend ? "px-10 xl:w-3/12 backdrop-blur-[5px] bg-gray-900/95 md:w-5/12 " : "justify-center"}`}>
       <div className="cursor-pointer py-2" onClick={() => setExtend(!extend)}>
         <figure className={`text-white flex gap-2 justify-center text-center  px-2 rounded-2xl transition-all ease-in-out ${!extend ? "flex-col":"flex-row"}`}>
           {extend ? <BiLibrary size={30}/> : <LuLibrary size={40} className="hover:bg-purple-500/20 rounded-2xl p-1" />}

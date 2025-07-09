@@ -6,23 +6,24 @@ import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
 
 
+
+
 const Albums = () => {
   const [albums, setAlbums] = useState<albumsTypes[]>([])
 
   useEffect(() => {
-    const ids = ["23241654", "49720765", "57614295","45320251","33008911"]
+    const ids = ["1007", "1002", "1003", "1004", "1005"]
     const fetchData = async () => {
       const res = await Promise.all(
-        ids.map(id => ALBUMS(id))
+        ids.map(id => ALBUMS(Number(id)))
       )
-      // console.log(res)
       const validRes = res
-        .filter(albums => albums !== undefined)
+        .filter(album => album?.album)
         .map(album => (
           {
-            id: album.data.id,
-            name: album.data.name,
-            image: album.data.image,
+            id: album.album.id,
+            title: album.album.title,
+            image: album.album.image,
           }
         ));
       setAlbums(validRes)
@@ -40,10 +41,15 @@ const Albums = () => {
       <div className="grid grid-cols-5 gap-7 p-5 xl:gap-10 max-sm:gap-35 md:gap-55 overflow-x-scroll">
         {albums.map((album) => (
           <Link to={`/albums/${album.id}`} key={album.id} >
+
             <motion.img
-              whileHover={{ scale: 1.05 }}
-              className="xl:w-[400px] xl:h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:max-w-32 max-sm:max-h-32 md:min-w-45 md:min-h-45"
-              src={album.image?.[2]?.url}
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.3, ease: "easeInOut" }
+              }}
+
+              className="xl:w-[400px] object-center xl:h-[240px] object-cover bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:min-w-32 max-sm:min-h-32 md:min-w-45 md:min-h-45"
+              src={album.image}
               alt="" />
           </Link>
         ))}

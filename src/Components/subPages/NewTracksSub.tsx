@@ -14,9 +14,10 @@ const NewTracksSub = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await SONGS("kylie", 5);
-      if (res?.data) {
-        setPlaylists(res.data.results)
+      const res = await SONGS("ad", 5);
+      if (res) {
+        console.log("test",res)
+        setPlaylists(res)
       }
     }
     fetchData()
@@ -24,11 +25,11 @@ const NewTracksSub = () => {
 
   const handlePlay = (song: SearchTypes) => {
       const selected: selectedSongs = {
-        artist: song.artists?.all[0].name,
-        title: song.title || song.name,
-        audio: song.downloadUrl[4].url,
+        artist: song.artist,
+        title: song.title,
+        audio: song.audio,
         id: song.id,
-        image: song.image?.[2]?.url || ""
+        image: song.image
       };
   
       setCurrentSong(selected)
@@ -47,9 +48,9 @@ const NewTracksSub = () => {
           <motion.img 
           onClick={()=>handlePlay(tracks)}
           whileHover={{scale:1.05}}
-          className="xl:w-[400px] xl:h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:max-h-32 max-sm:max-w-32 md:min-w-45 md:min-h-45" 
+          className="xl:w-[400px] xl:h-[240px] bg-gray-900 object-cover object-center rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:min-h-32 max-sm:min-w-32 md:min-w-45 md:min-h-45" 
           key={tracks.id} 
-          src={tracks.image[2].url} 
+          src={tracks.image} 
           alt="songImage" />
         ))}
 

@@ -179,7 +179,8 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
                             onClick={(e) => {
                                 e.stopPropagation()
                                 onPlayHandle()
-                            }} className='cursor-pointer text-white'>
+                            }}
+                            className='cursor-pointer text-white'>
                             {isPlaying ? <LuPause size={25} /> : <LuPlay size={25} />}
                         </motion.button>
                         <input
@@ -194,7 +195,6 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
                                     audio: song.audio,
                                     image: song.image
                                 }
-
                                 setSelectedSong((prev) => {
                                     if (isChecked) return [...prev, songSet];
                                     return prev.filter((s) => s.audio !== songSet.audio);

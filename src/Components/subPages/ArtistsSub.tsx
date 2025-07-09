@@ -10,14 +10,13 @@ const ArtistsSub = () => {
 
     useEffect(() => {
 
-        const ids = ["644945", "1906686", "3871652", "670448"];
+        const ids = ["10001", "10002", "10003", "10004", "10006"];
         const fetchData = async () => {
             const res = await Promise.all(
-                ids.map(id => ARTISTS(id))
+                ids.map(id => ARTISTS(Number(id)))
             )
-
-            const validRes = res.filter(data => data !== null).map(data => data!.artists)
-            setArtist(validRes)
+            console.log("artistres", res)
+            setArtist(res)
         }
         fetchData()
     }, [])
@@ -31,13 +30,16 @@ const ArtistsSub = () => {
             </div>
             <div className="grid grid-cols-5 gap-7 p-5 xl:gap-10  max-sm:gap-35 md:gap-55 overflow-x-scroll">
                 {artist.map((userName) => (
-
                     <Link to={`/artists/${userName.id}`} key={userName.id}>
-                        <motion.img
-                            className="xl:w-[400px] xl:h-[240px] bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:max-h-32 max-sm:max-w-32 md:min-w-45 md:min-h-40"
-                            src={userName.image?.[2].url} alt=""
-                        />
-                        <p className="text-white text-sm text-center max-sm:text-[10px] whitespace-nowrap">{userName.name}</p>
+                        <motion.figure
+                            whileHover={{ scale: 1.05 }}
+                        >
+                            <img
+                                className="xl:w-[400px] object-center xl:h-[240px] object-cover bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:min-w-32 max-sm:min-h-32 md:min-w-45 md:min-h-45"
+                                src={userName.image} alt=""
+                            />
+                            <p className="text-white text-sm text-center max-sm:text-[10px] whitespace-nowrap">{userName.title}</p>
+                        </motion.figure>
                     </Link>
                 ))}
 

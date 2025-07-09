@@ -1,40 +1,48 @@
 import axios from "axios"
 import { useLocation } from "react-router-dom"
+// import type { artistTypes } from "../types"
+
+
+
 
 
 export const SONGS = async (query: string, limit: number) => {
     try {
-        const Songs = await axios.get(`https://saavn.dev/api/search/songs?query=${query}&limit=${limit}`)
-        const { data } = Songs.data
-        return { data };
+        const Songs = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/songs?query=${query}&limit=${limit}`)
+        console.log(Songs)
+        return Songs.data;
     } catch (error) {
         console.error("Couldn't fetch songs", error)
     }
 }
 
-export const ALBUMS = async (id: string) => {
+export const CAROUSEL = async() => {
+    try{
+        const data = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/songs`)
+        return data.data
+    }catch(err){
+        console.error("Data amiss",err)
+    }
+}
+
+
+export const ALBUMS = async (id:number) => {
     try {
-        const albums = await axios.get(`https://saavn.dev/api/albums?id=${id}`)
-        const { data } = albums.data
-        // console.log(data)
-        return { data };
+        const Songs = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/albums/${id}`)
+        // console.log(Songs)
+        return Songs.data
     } catch (error) {
         console.error("Couldn't fetch songs", error)
     }
 }
 
-export const ARTISTS = async (id: string) => {
+export const ARTISTS = async (id:number) => {
 
     try {
-        const [res1, res2] = await Promise.all([
-            axios.get(`https://saavn.dev/api/artists?id=${id}`),
-            axios.get(`https://saavn.dev/api/artists/${id}/songs`)
-        ])
+        const data = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/artists/${id}/songs`)
+            // axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/artists/${id}/songs`)
 
-        return {
-            artists: res1.data.data,
-            artistSongs: res2.data.data
-        };
+        return data.data
     } catch (error) {
         console.error("Couldn't fetch artists", error)
     }
@@ -42,14 +50,15 @@ export const ARTISTS = async (id: string) => {
 
 export const SEARCH = async (query: string) => {
     try {
-        const [res1, res2] = await Promise.all([
-            axios.get(`https://saavn.dev/api/search?query=${query}`),
-            axios.get(`https://saavn.dev/api/search/songs?query=${query}`),
+        const [res1, res2,res3] = await Promise.all([
+            axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/albums?query=${query}`),
+            axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/songs?query=${query}`),
+            axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/artists?query=${query}`)
         ]);
-        console.log(res2.data.data)
         return {
-            dataFetched: res1.data.data,
-            dataOfSongs: res2.data.data
+            dataFetched: res1,
+            dataOfSongs: res2,
+            dataOfArtist: res3
         };
 
     } catch {

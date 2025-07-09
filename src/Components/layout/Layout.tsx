@@ -24,7 +24,7 @@ const Layout = () => {
             <Sidebar selectedSongs={selectedSongs} />
           </aside>
           <div className="w-full px-20 relative max-sm:px-3 md:px-15">
-            <Outlet context={{ selectedSongs, setSelectedSongs, setCurrentSong }} />
+            <Outlet context={{ selectedSongs, setSelectedSongs, setCurrentSong , currentSong }} />
           </div>
         </div>
         {currentSong && (
