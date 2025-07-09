@@ -37,5 +37,4 @@ A full-stack music streaming web application built with **React**, **Tailwind CS
 - Express
 - TypeScript
 - Static JSON files (`songs.json`, `albums.json`, `artists.json`)
-- In-memory caching for performance
 
