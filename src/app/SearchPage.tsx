@@ -78,11 +78,11 @@ const SearchPage = () => {
             </Link>
           )}
         </div>
-        <aside className="w-1/2  space-y-4 overflow-y-scroll overflow-x-hidden h-[72vh] bg-blend-color max-sm:w-full max-sm:px-4 md:w-full md:gap-5 md:grid md:grid-cols-2 md:px-5 xl:grid-cols-1 xl:w-1/2 xl:px-0 xl:gap-1.5 ">
+        <aside className="w-1/2  space-y-4 overflow-y-scroll overflow-x-hidden h-[72vh] bg-blend-color max-sm:w-full max-sm:px-4 md:w-full md:gap-2 md:grid md:grid-cols-2 md:px-5 xl:grid-cols-1 xl:w-1/2 xl:px-0 xl:gap-1.5 ">
           {searched.map((element) => (
             <div className="justify-between max-w-full max-h-30 bg-Gray/10 p-2 rounded-2xl hover:bg-cream/10 cursor-pointer" key={element.id} onClick={() => handlePlay(element)}>
               <figure className="flex gap-2">
-                <img className="min-w-0 rounded-2xl object-cover" src={element.image} alt="" />
+                <img className=" rounded-2xl object-cover max-sm:max-w-2/7 md:max-w-1/7 xl:max-w-1/7" src={element.image} alt="" />
                 {/* For mobile users */}
                 <aside className="flex xl:flex-row max-sm:flex-col max-sm:gap-2 md:flex-col">
                   {/* For all devices */}
