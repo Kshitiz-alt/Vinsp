@@ -22,7 +22,7 @@ const Mainpage = () => {
   return (
     <section ref={page} className="h-[96.8svh] max-sm:min-w-0 w-full">
       <Carousel />
-      <div className="absolute flex-col top-1/2 p-1 w-11/12 md:px-4">
+      <div className="relative w-full flex-col -mt-10 md:px-4">
           <NewTracksSub />
           <Albums />
           <ArtistsSub/>
