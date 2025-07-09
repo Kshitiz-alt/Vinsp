@@ -35,7 +35,7 @@ const Navbar = () => {
     return (
         <>
             <nav className="w-full fixed flex p-4 z-40 backdrop-blur-sm max-sm:h-16  max-sm:bg-cream/40 max-sm:backdrop-blur-sm md:h-16 xl:h-20">
-                <Link to="/" className="text-transparent bg-clip-text bg-gradient-to-r from-white to-cream backdrop-blur-2xl xl:text-4xl text-nowrap p-1.5 rounded-xl tracking-wider max-sm:hidden md:text-lg" style={{textShadow:"0px 1px 1px rgba(#fffff,0.5)"}}>Vinsp</Link>
+                <Link to="/" className="text-transparent bg-clip-text bg-gradient-to-r from-white to-cream backdrop-blur-2xl xl:text-4xl text-nowrap p-1.5 rounded-xl tracking-wider max-sm:hidden md:text-lg" style={{textShadow:"0px 1px 1px rgba(0,0,0,0.5)"}}>Vinsp</Link>
                 <header className="flex gap-4 justify-end w-full">
                     {/*Search bar */}
                     <AnimatePresence>
