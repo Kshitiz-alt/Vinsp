@@ -48,7 +48,7 @@ const Albums = () => {
                 transition: { duration: 0.3, ease: "easeInOut" }
               }}
 
-              className="xl:w-[400px] object-center xl:h-[240px] object-cover bg-gray-900 rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:min-w-32 max-sm:min-h-32 md:min-w-45 md:min-h-45"
+              className="xl:w-[400px] xl:h-[240px] bg-gray-900 object-cover object-center rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:min-h-32 max-sm:min-w-32 md:min-w-45 md:min-h-45"
               src={album.image}
               alt="" />
           </Link>

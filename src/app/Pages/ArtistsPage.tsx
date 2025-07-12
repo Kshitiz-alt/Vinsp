@@ -86,7 +86,7 @@ const ArtistsPage = () => {
                                 {artistData.genre}
                             </figcaption>
 
-                            <figcaption className="text-white text-center xl:text-4xl max-sm:text-sm md:text-2xl">
+                            <figcaption className="bg-clip-text text-transparent bg-gradient-to-r from-cream to-white text-center xl:text-4xl max-sm:text-sm md:text-2xl">
                                 {artistData.title}
                             </figcaption>
                         </div>

@@ -23,7 +23,6 @@ const SearchPage = () => {
       id: song.id,
       image: song.image
     };
-
     setCurrentSong(selected)
   }
 
@@ -37,11 +36,11 @@ const SearchPage = () => {
     if (!query.trim()) return
     const data = async () => {
       try {
-        const { dataFetched, dataOfSongs ,dataOfArtist } = await SEARCH(query)
+        const { dataFetched, dataOfSongs, dataOfArtist } = await SEARCH(query)
         setSearched(dataOfSongs.data)
         setAlbumState(dataFetched.data[0])
         setArtistData(dataOfArtist.data[0])
-        console.log("artists",dataOfArtist.data[0])
+        console.log("artists", dataOfArtist.data[0])
       } catch (error) {
         console.error('searched data not found', error)
       }
@@ -50,12 +49,12 @@ const SearchPage = () => {
   }, [query]);
 
   return (
-    <motion.section 
-    initial={{opacity:0,y:300}}
-    animate={{opacity:1,y:0}}
-    exit={{opacity:0,y:300}}
-    transition={{duration:1}}
-    className="relative top-20 w-full xl:h-[83.4vh] overflow-hidden bg-Gray/10 rounded-2xl max-sm:h-full md:h-full">
+    <motion.section
+      initial={{ opacity: 0, y: 300 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 300 }}
+      transition={{ duration: 1 }}
+      className="relative top-20 w-full xl:h-[83.4vh] overflow-hidden bg-Gray/10 rounded-2xl max-sm:h-full md:h-full">
       <h1 className="text-white xl:text-2xl p-4 max-sm:text-[12px] md:text-sm">{t("searchquery")}<span className="text-cream px-3">{query}</span> </h1>
       <section className="flex xl:flex-row pr-4 gap-30 max-sm:flex-col md:flex-col max-sm:gap-15">
         <div className="w-1/2 flex flex-col xl:flex-col xl:w-7/12 items-center gap-3 py-1 px-5 max-sm:w-full md:w-full md:flex-row">

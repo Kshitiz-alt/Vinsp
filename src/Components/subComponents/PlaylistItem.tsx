@@ -56,7 +56,7 @@ const PlaylistItem = ({S_no, duration, artist, onSelect, title, audio, image, is
                         <div className="flex gap-2">
                             <LuMicVocal size={20} className="max-sm:hidden md:hidden" color="red" />
                             {/* <Artist artists={artists} /> */}
-                            <span className="text-white w-58 max-sm:text-[9px] md:text-[12px] xl:text-sm">{artist}</span>
+                            <span className="text-white self-center w-58 max-sm:text-[9px] md:text-[12px] xl:text-sm">{artist}</span>
                         </div>
                     </aside>
                 </figure>
