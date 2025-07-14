@@ -83,13 +83,13 @@ const ArtistsPage = () => {
                             src={artistData.image}
                             alt=""
                         />
-                        <div className='flex flex-col items-end gap-3'>
+                        <div className='flex flex-col p-3 max-sm:flex-row md:flex-col-reverse xl:flex-col'>
                             {artistState.length > 0 && (
 
                                 <motion.button
                                     whileTap={{ rotate: 90, scale: 1.2 }}
 
-                                    className="text-cream hover:text-white p-1 border-2 rounded-full w-17 max-sm:hidden"
+                                    className="w-19 h-19 text-cream flex justify-center items-center cursor-pointer hover:text-white p-1.5 border-2 rounded-full max-sm:w-10 max-sm:h-10 md:hidden xl:block"
                                     onClick={() => {
                                         const selected = artistState.map((song: selectedSongs) => ({
                                             id: song.id,
@@ -102,13 +102,13 @@ const ArtistsPage = () => {
                                         // setSelectedSongs(selected)
                                         setCurrentSong(selected[0])
                                     }}>
-                                    <BiPlay className="w-15 h-15" />
+                                    <BiPlay className="w-15 h-15 max-sm:w-7 max-sm:h-7" />
                                 </motion.button>
                             )
 
                             }
                             <aside className="flex flex-col max-sm:flex-col-reverse">
-                                <figcaption className="text-transparent flex justify-end bg-gradient-to-r from-white to-cream bg-clip-text max-sm:text-sm">
+                                <figcaption className="text-transparent flex justify-end bg-gradient-to-r from-white to-cream bg-clip-text max-sm:text-sm max-sm:ml-6">
                                     {artistData.genre}
                                 </figcaption>
 
