@@ -95,7 +95,7 @@ const AlbumsPage = () => {
                       artist: song.artist,
                       duration: song.duration
                     }))
-                    // setSelectedSongs(selected)
+                    setSelectedSongs(selected)
                     setCurrentSong(selected[0])
                   }}>
                   <BiPlay className="w-15 h-15 max-sm:w-7 max-sm:h-7" />
