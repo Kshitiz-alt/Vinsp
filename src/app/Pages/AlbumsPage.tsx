@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { useEffect, useState } from "react"
 import { useOutletContext, useParams } from "react-router-dom"
 import { ALBUMS, ProperTitle } from "../../Constants/Fetch"
@@ -7,6 +8,7 @@ import type {
   OutletContextType, SearchTypes, selectedSongs
 } from "../../types"
 import PlaylistItem from "../../Components/subComponents/PlaylistItem"
+import { BiPlay } from "react-icons/bi"
 
 
 
@@ -76,15 +78,40 @@ const AlbumsPage = () => {
       )}
       <div>
         {albumData && (
-          <figure className="relative top-30 flex items-end gap-2 max-sm:flex-col max-sm:items-center">
-            <img className="xl:w-[384px] rounded-2xl shadow-sm max-sm:w-11/12 shadow-cream md:w-1/4" src={albumData.image} alt="" />
-            <figcaption className="text-white text-center xl:text-4xl max-sm:text-sm md:text-2xl">{ProperTitle(albumData.title)}</figcaption>
+          <figure className="relative top-30 flex items-end gap-5 max-sm:flex-col max-sm:items-center">
+            <img className="xl:w-[384px] rounded-2xl shadow-sm max-sm:w-11/12 shadow-cream md:w-2/5 xl:1/4" src={albumData.image} alt="" />
+            <div className="flex flex-col p-3 max-sm:flex-row md:flex-col-reverse xl:flex-col">
+              {albumItem.length > 0 && (
+                <motion.button
+                whileTap={{rotate:90,scale:1.2}}
+                
+                  className="w-19 h-19 text-cream flex justify-center items-center cursor-pointer hover:text-white p-1.5 border-2 rounded-full max-sm:w-10 max-sm:h-10 md:hidden xl:block"
+                  onClick={() => {
+                    const selected = albumItem.map((song: selectedSongs) => ({
+                      id: song.id,
+                      title: song.title,
+                      audio: song.audio,
+                      image: song.image,
+                      artist: song.artist,
+                      duration: song.duration
+                    }))
+                    // setSelectedSongs(selected)
+                    setCurrentSong(selected[0])
+                  }}>
+                  <BiPlay className="w-15 h-15 max-sm:w-7 max-sm:h-7" />
+                </motion.button>
+              )
+
+              }
+
+              <figcaption className="text-white text-center xl:text-4xl max-sm:text-sm max-sm:p-2.5 md:text-2xl">{ProperTitle(albumData.title)}</figcaption>
+            </div>
           </figure>
         )}
       </div>
       <aside className="w-3/4 flex flex-col gap-4 py-30 relative max-sm:w-full max-sm:top-20 md:w-full md:top-30 xl:top-0">
 
-        {albumItem.map((element,index) => (
+        {albumItem.map((element, index) => (
           <PlaylistItem
             key={element.id}
             S_no={index + 1}

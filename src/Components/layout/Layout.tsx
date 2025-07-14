@@ -24,11 +24,22 @@ const Layout = () => {
             <Sidebar selectedSongs={selectedSongs} />
           </aside>
           <div className="w-full px-20 relative max-sm:px-3 md:px-15">
-            <Outlet context={{ selectedSongs, setSelectedSongs, setCurrentSong , currentSong }} />
+            <Outlet context={{ selectedSongs, setSelectedSongs, setCurrentSong, currentSong }} />
           </div>
         </div>
         {currentSong && (
-          <Playbar song={currentSong} onEnd={()=>setCurrentSong(null)} setSelectedSong={setSelectedSongs} />
+          <Playbar
+            song={currentSong}
+            onEnd={() => {
+              const CurntIndex = selectedSongs.findIndex(s => s.audio === currentSong.audio);
+              const nextIndex = selectedSongs[CurntIndex + 1];
+              if (nextIndex) {
+                setCurrentSong(nextIndex);
+              } else {
+                setCurrentSong(null)
+              }
+            }}
+            setSelectedSong={setSelectedSongs} />
         )}
       </LayoutContext.Provider>
     </section>

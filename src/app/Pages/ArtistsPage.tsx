@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { ARTISTS } from "../../Constants/Fetch";
@@ -9,6 +10,7 @@ import type {
     selectedSongs,
 } from "../../types";
 import PlaylistItem from "../../Components/subComponents/PlaylistItem";
+import { BiPlay } from "react-icons/bi";
 
 const ArtistsPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -81,14 +83,39 @@ const ArtistsPage = () => {
                             src={artistData.image}
                             alt=""
                         />
-                        <div className="flex flex-col max-sm:flex-col-reverse">
-                            <figcaption className="text-transparent flex justify-end bg-gradient-to-r from-white to-cream bg-clip-text max-sm:text-sm">
-                                {artistData.genre}
-                            </figcaption>
+                        <div className='flex flex-col items-end gap-3'>
+                            {artistState.length > 0 && (
 
-                            <figcaption className="bg-clip-text text-transparent bg-gradient-to-r from-cream to-white text-center xl:text-4xl max-sm:text-sm md:text-2xl">
-                                {artistData.title}
-                            </figcaption>
+                                <motion.button
+                                    whileTap={{ rotate: 90, scale: 1.2 }}
+
+                                    className="text-cream hover:text-white p-1 border-2 rounded-full w-17 max-sm:hidden"
+                                    onClick={() => {
+                                        const selected = artistState.map((song: selectedSongs) => ({
+                                            id: song.id,
+                                            title: song.title,
+                                            audio: song.audio,
+                                            image: song.image,
+                                            artist: song.artist,
+                                            duration: song.duration
+                                        }))
+                                        // setSelectedSongs(selected)
+                                        setCurrentSong(selected[0])
+                                    }}>
+                                    <BiPlay className="w-15 h-15" />
+                                </motion.button>
+                            )
+
+                            }
+                            <aside className="flex flex-col max-sm:flex-col-reverse">
+                                <figcaption className="text-transparent flex justify-end bg-gradient-to-r from-white to-cream bg-clip-text max-sm:text-sm">
+                                    {artistData.genre}
+                                </figcaption>
+
+                                <figcaption className="bg-clip-text text-transparent bg-gradient-to-r from-cream to-white text-center xl:text-4xl max-sm:text-sm md:text-2xl">
+                                    {artistData.title}
+                                </figcaption>
+                            </aside>
                         </div>
                     </figure>
                 </div>
@@ -96,7 +123,7 @@ const ArtistsPage = () => {
 
             {/* Song List */}
             <aside className="w-3/4 flex flex-col gap-4 py-30 relative max-sm:w-full max-sm:top-20 md:w-full md:top-30 xl:top-0">
-                {artistState.map((element,index) => (
+                {artistState.map((element, index) => (
                     <PlaylistItem
                         key={element.id}
                         S_no={index + 1}
