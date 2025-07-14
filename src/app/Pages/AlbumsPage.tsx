@@ -8,7 +8,7 @@ import type {
   OutletContextType, SearchTypes, selectedSongs
 } from "../../types"
 import PlaylistItem from "../../Components/subComponents/PlaylistItem"
-import { BiPlay } from "react-icons/bi"
+import { BiPlay, BiPlus } from "react-icons/bi"
 
 
 
@@ -19,7 +19,7 @@ const AlbumsPage = () => {
 
   const [playingAudio, setPlayingAudio] = useState<HTMLAudioElement>();
   const [isTitle, setTitle] = useState<string | null>(null);
-  const { setSelectedSongs, setCurrentSong } = useOutletContext<OutletContextType>();
+  const { setSelectedSongs, setCurrentSong , setSelectedAlbums } = useOutletContext<OutletContextType>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,11 +81,13 @@ const AlbumsPage = () => {
           <figure className="relative top-30 flex items-end gap-5 max-sm:flex-col max-sm:items-center">
             <img className="xl:w-[384px] rounded-2xl shadow-sm max-sm:w-11/12 shadow-cream md:w-2/5 xl:1/4" src={albumData.image} alt="" />
             <div className="flex flex-col p-3 max-sm:flex-row md:flex-col-reverse xl:flex-col">
+              <div className='flex gap-4 max-sm:flex-row-reverse xl:flex-row'>
+
               {albumItem.length > 0 && (
                 <motion.button
-                whileTap={{rotate:90,scale:1.2}}
-                
-                  className="w-19 h-19 text-cream flex justify-center items-center cursor-pointer hover:text-white p-1.5 border-2 rounded-full max-sm:w-10 max-sm:h-10 md:hidden xl:block"
+                  whileTap={{ rotate: 90, scale: 1.05 }}
+
+                  className="w-18.5 h-18.5 text-darkcream flex justify-center items-center  cursor-pointer bg-white/30 hover:bg-white/40 p-4 border-2 rounded-full max-sm:w-13 max-sm:h-13 md:hidden xl:block xl:mb-5"
                   onClick={() => {
                     const selected = albumItem.map((song: selectedSongs) => ({
                       id: song.id,
@@ -98,11 +100,28 @@ const AlbumsPage = () => {
                     setSelectedSongs(selected)
                     setCurrentSong(selected[0])
                   }}>
-                  <BiPlay className="w-15 h-15 max-sm:w-7 max-sm:h-7" />
+                  <BiPlay className="w-10 h-10 max-sm:w-7 max-sm:h-7" />
                 </motion.button>
-              )
-
-              }
+              )}
+              <motion.button
+                whileTap={{rotate:90, scale: 0.95 }}
+                className="w-18.5 h-18.5 flex justify-center items-center text-darkcream text-sm border-2 rounded-full bg-white/30 hover:bg-white/40 cursor-pointer max-sm:w-13 max-sm:h-13 md:hidden xl:block xl:px-3.5"
+                onClick={() => {
+                  if (!albumData) return;
+                  setSelectedAlbums?.(prev => {
+                    const exists = prev.some(a => a.id === albumData.id);
+                    if (exists) return prev;
+                    return [...prev, {
+                      id: albumData.id,
+                      title: albumData.title,
+                      image: albumData.image,
+                    }];
+                  });
+                }}
+              >
+                <BiPlus className='w-10 h-10'/>
+              </motion.button>
+              </div>
 
               <figcaption className="text-white text-center xl:text-4xl max-sm:text-sm max-sm:p-2.5 md:text-2xl">{ProperTitle(albumData.title)}</figcaption>
             </div>

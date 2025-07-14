@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Layouts/Sidebar";
 import Navbar from "./Layouts/Navbar";
-import type { selectedSongs } from "../../types";
+import type { selectedAlbums, selectedSongs } from "../../types";
 import { useState } from "react";
 import Playbar from "../subComponents/Playbar";
 import { LayoutContext } from "../../Constants/Context";
@@ -10,6 +10,7 @@ import { LayoutContext } from "../../Constants/Context";
 
 const Layout = () => {
   const [selectedSongs, setSelectedSongs] = useState<selectedSongs[]>([]);
+  const [selectedAlbums, setSelectedAlbums] = useState<selectedAlbums[]>([])
   const [currentSong, setCurrentSong] = useState<selectedSongs | null>(null);
   const [extend, setExtend] = useState(false)
 
@@ -21,10 +22,10 @@ const Layout = () => {
         <Navbar />
         <div className="flex">
           <aside className="">
-            <Sidebar selectedSongs={selectedSongs} />
+            <Sidebar selectedSongs={selectedSongs} selectedAlbums={selectedAlbums} />
           </aside>
           <div className="w-full px-20 relative max-sm:px-3 md:px-15">
-            <Outlet context={{ selectedSongs, setSelectedSongs, setCurrentSong, currentSong }} />
+            <Outlet context={{ selectedSongs, setSelectedSongs, currentSong, setCurrentSong, selectedAlbums , setSelectedAlbums   }} />
           </div>
         </div>
         {currentSong && (

@@ -87,9 +87,9 @@ const ArtistsPage = () => {
                             {artistState.length > 0 && (
 
                                 <motion.button
-                                    whileTap={{ rotate: 90, scale: 1.2 }}
+                                    whileTap={{ rotate: 90, scale: 1.05 }}
 
-                                    className="w-19 h-19 text-cream flex justify-center items-center cursor-pointer hover:text-white p-1.5 border-2 rounded-full max-sm:w-10 max-sm:h-10 md:hidden xl:block"
+                                    className="w-18.5 h-18.5 text-cream flex justify-center items-center cursor-pointer hover:text-white p-1.5 border-2 rounded-full max-sm:w-10 max-sm:h-10 md:hidden xl:block"
                                     onClick={() => {
                                         const selected = artistState.map((song: selectedSongs) => ({
                                             id: song.id,

@@ -1,16 +1,18 @@
 import { useTranslation } from "react-i18next";
 import { BiDownload, BiLibrary } from "react-icons/bi";
 import { LuLibrary } from "react-icons/lu"
-import type { selectedSongs } from "../../../types";
+import type { selectedAlbums, selectedSongs } from "../../../types";
 import Download from "../../../Constants/CustomDL";
 import { ProperTitle } from "../../../Constants/Fetch";
 import { useLayoutContext } from "../../../Constants/Context";
+import { Link } from "react-router-dom";
 
 type siderbarProps = {
-  selectedSongs: selectedSongs[]
+  selectedSongs: selectedSongs[];
+  selectedAlbums: selectedAlbums[]
 }
 
-const Sidebar = ({ selectedSongs }: siderbarProps) => {
+const Sidebar = ({ selectedSongs , selectedAlbums}: siderbarProps) => {
   const { t } = useTranslation()
   const { extend,setExtend} = useLayoutContext()
   
@@ -32,12 +34,18 @@ const Sidebar = ({ selectedSongs }: siderbarProps) => {
 
       </div>
       {extend &&
-        <div className="px-2 py-10">
+        <div className="py-10 flex flex-col gap-2">
           {selectedSongs.map((song, index) => (
             <div className="flex gap-5 space-y-5 hover:bg-cream/10 p-1 hover:rounded-2xl" key={index}>
               <img className="w-1/4 rounded-2xl" src={song.image} alt="" />
               <span className="text-red-300">{ProperTitle(song.title)}</span>
             </div>
+          ))}
+          {selectedAlbums.map((albums)=>(
+            <Link to={`/albums/${albums.id}`} key={albums.id} className="flex gap-4 hover:bg-cream/10 rounded-full duration-200 p-1">
+              <img className="w-20 h-20 object-center object-cover rounded-full" src={albums.image} alt="" />
+              <span className="text-white">{albums.title}</span>
+            </Link>
           ))}
         </div>}
     </section>

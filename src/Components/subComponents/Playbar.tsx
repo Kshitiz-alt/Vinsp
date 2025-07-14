@@ -137,7 +137,7 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
                 }
                 }
             >
-                <img className="w-12 rounded-full shadow-2xs shadow-cream" src={song.image} alt="" />
+                <img className="w-12 h-12 rounded-full object-center object-cover shadow-2xs shadow-cream" src={song.image} alt="" />
                 {extendPlayer && (
                     <div className='flex xl:gap-5 max-sm:gap-3 md:gap-5 items-center'>
                         <div className='flex xl:flex-row max-sm:flex-col md:flex-col max-sm:gap-2 md:gap-2'>

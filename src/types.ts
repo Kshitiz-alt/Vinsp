@@ -3,6 +3,8 @@ import type { Dispatch, SetStateAction } from "react";
 export interface OutletContextType {
     selectedSongs: selectedSongs[],
     currentSong:selectedSongs | null;
+    selectedAlbums?:selectedAlbums[];
+    setSelectedAlbums?:Dispatch<SetStateAction<selectedAlbums[]>>
     setSelectedSongs: Dispatch<SetStateAction<selectedSongs[]>>,
     setCurrentSong: Dispatch<SetStateAction<selectedSongs | null>>
 }
@@ -50,6 +52,12 @@ export interface PlaylistItemTypes {
     artist: string
 }
 
+export interface selectedAlbums {
+    title:string;
+    image?:string;
+    id?:number;
+    songs?:selectedSongs[];
+}
 export interface selectedSongs {
     title: string
     audio: string
