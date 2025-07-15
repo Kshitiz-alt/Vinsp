@@ -44,7 +44,7 @@ const PlaylistItem = ({S_no, duration, artist, onSelect, title, audio, image, is
             <div ref={hoverRef} className={`hover:bg-cream focus-within:bg-cream/10 border overflow-hidden border-cream rounded-2xl transition-all duration-150 ease-in-out cursor-pointer backdrop-blur-[30px] flex gap-5 items-center max-sm:gap-2 max-sm:p-2 max-sm:text-[10px] md:w-[126%] md:p-1.5 xl:w-full xl:p-3 ${isCurrent ? "bg-cream/90 border-[2px] border-white" : ""}`} onClick={() => handleWithAudio()}>
                 <figure className="flex max-sm:flex max-sm:gap-2 max-sm:w-2/3 md:gap-10">
                     <span className={`w-0 text-nowrap text-cream self-center md:text-sm xl:text-sm ${isCurrent ? "text-white" : ""}`}>{S_no}</span>
-                    <img className="w-10 h-10 object-cover object-center absolute left-9 max-sm:left-5 max-sm:self-center md:w-10 md:self-center xl:self-center rounded-full" src={image} alt="" />
+                    <img className="w-10 h-10 object-cover object-center absolute left-9 max-sm:w-7 max-sm:h-7 max-sm:left-5 max-sm:self-center md:w-10 md:self-center xl:self-center rounded-full" src={image} alt="" />
                     <aside className="px-13 max-sm:px-10 max-sm:flex-col max-sm:gap-2 md:px-10 xl:flex">
                         <p
                             onMouseEnter={() => setHover(true)}

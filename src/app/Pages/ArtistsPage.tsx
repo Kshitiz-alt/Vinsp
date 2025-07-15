@@ -19,7 +19,7 @@ const ArtistsPage = () => {
     const [playingAudio, setPlayingAudio] = useState<HTMLAudioElement>();
     const [isTitle, setTitle] = useState<string | null>(null);
 
-    const { setSelectedSongs, setCurrentSong , setSelectedAlbums} = useOutletContext<OutletContextType>();
+    const { setSelectedSongs, setCurrentSong, setSelectedAlbums } = useOutletContext<OutletContextType>();
 
     useEffect(() => {
         const fetchArtist = async () => {
@@ -84,48 +84,51 @@ const ArtistsPage = () => {
                             alt=""
                         />
                         <div className='flex flex-col p-3 max-sm:flex-row max-sm:gap-3 md:flex-col-reverse xl:flex-col'>
-                            {artistState.length > 0 && (
+                            <div className='flex gap-4 justify-end'>
 
+                                {artistState.length > 0 && (
+
+                                    <motion.button
+                                        whileTap={{ rotate: 90, scale: 1.05 }}
+
+                                        className="w-12.5 text-darkcream flex justify-center items-center text-sm cursor-pointer bg-white/30 hover:bg-white/40 p-4 border-2 rounded-full md:hidden xl:block"
+                                        onClick={() => {
+                                            const selected = artistState.map((song: selectedSongs) => ({
+                                                id: song.id,
+                                                title: song.title,
+                                                audio: song.audio,
+                                                image: song.image,
+                                                artist: song.artist,
+                                                duration: song.duration
+                                            }))
+                                            setSelectedSongs(selected)
+                                            setCurrentSong(selected[0])
+                                        }}>
+                                        <BiPlay width={30} height={30} />
+                                    </motion.button>
+                                )
+
+                                }
                                 <motion.button
-                                    whileTap={{ rotate: 90, scale: 1.05 }}
-
-                                    className="w-18.5 h-18.5 text-cream flex justify-center items-center cursor-pointer hover:text-white p-1.5 border-2 rounded-full max-sm:w-10 max-sm:h-10 md:hidden xl:block"
+                                    type='button'
+                                    whileTap={{ rotate: 90, scale: 0.95 }}
+                                    className="w-12.5 flex justify-center items-center text-darkcream text-sm border-2 p-4 rounded-full bg-white/30 hover:bg-white/40 cursor-pointer max-sm:hidden md:hidden xl:block xl:px-4"
                                     onClick={() => {
-                                        const selected = artistState.map((song: selectedSongs) => ({
-                                            id: song.id,
-                                            title: song.title,
-                                            audio: song.audio,
-                                            image: song.image,
-                                            artist: song.artist,
-                                            duration: song.duration
-                                        }))
-                                        setSelectedSongs(selected)
-                                        setCurrentSong(selected[0])
-                                    }}>
-                                    <BiPlay width={30} height={30} />
+                                        if (!artistData) return;
+                                        setSelectedAlbums?.(prev => {
+                                            const exists = prev.some(a => a.id === artistData.id);
+                                            if (exists) return prev;
+                                            return [...prev, {
+                                                id: artistData.id,
+                                                title: artistData.title,
+                                                image: artistData.image,
+                                            }];
+                                        });
+                                    }}
+                                >
+                                    <BiPlus width={30} height={30} />
                                 </motion.button>
-                            )
-
-                            }
-                            <motion.button
-                                type='button'
-                                whileTap={{ rotate: 90, scale: 0.95 }}
-                                className="flex justify-center items-center text-darkcream text-sm border-2 rounded-full bg-white/30 hover:bg-white/40 cursor-pointer max-sm:hidden md:hidden xl:block xl:px-4"
-                                onClick={() => {
-                                    if (!artistData) return;
-                                    setSelectedAlbums?.(prev => {
-                                        const exists = prev.some(a => a.id === artistData.id);
-                                        if (exists) return prev;
-                                        return [...prev, {
-                                            id: artistData.id,
-                                            title: artistData.title,
-                                            image: artistData.image,
-                                        }];
-                                    });
-                                }}
-                            >
-                                 <BiPlus width={30} height={30} />
-                            </motion.button>
+                            </div>
                             <aside className="flex flex-col max-sm:flex-col-reverse max-sm:self-center">
                                 <figcaption className="text-transparent flex justify-end bg-gradient-to-r from-white to-cream bg-clip-text max-sm:text-[10px] max-sm:justify-start">
                                     {artistData.genre}
