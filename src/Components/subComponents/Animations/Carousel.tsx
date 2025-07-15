@@ -10,18 +10,21 @@ const Carousel = () => {
 
   // Fetch data
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await CAROUSEL()
+    try {
+      const fetchData = async () => {
+        const ids = ["1007", "1002", "1003", "1004", "1005", "1006", "1008", "1009", "1010", "1011"];
+        const res = await Promise.all(
+          ids.map(id => CAROUSEL(Number(id)))
+        )
         console.log("test---", res)
         if (res) {
-          setPlaylists(res.song)
+          setPlaylists(res)
         }
-      } catch {
-        console.error("Failed to fetch")
       }
+      fetchData()
+    } catch {
+      console.error("Failed to fetch")
     }
-    fetchData()
   }, [])
 
   useEffect(() => {
