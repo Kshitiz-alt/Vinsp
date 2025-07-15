@@ -19,7 +19,7 @@ export const SONGS = async (query: string, limit: number) => {
 export const CAROUSEL = async(id:number) => {
     try{
         const data = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/albums/${id}`)
-        return data.data.album
+        return data.data.albums
     }catch(err){
         console.error("Data amiss",err)
     }
