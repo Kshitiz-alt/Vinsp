@@ -10,7 +10,7 @@ import type {
     selectedSongs,
 } from "../../types";
 import PlaylistItem from "../../Components/subComponents/PlaylistItem";
-import { BiPlay } from "react-icons/bi";
+import { BiPlay, BiPlus } from "react-icons/bi";
 
 const ArtistsPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -19,7 +19,7 @@ const ArtistsPage = () => {
     const [playingAudio, setPlayingAudio] = useState<HTMLAudioElement>();
     const [isTitle, setTitle] = useState<string | null>(null);
 
-    const { setSelectedSongs, setCurrentSong } = useOutletContext<OutletContextType>();
+    const { setSelectedSongs, setCurrentSong , setSelectedAlbums} = useOutletContext<OutletContextType>();
 
     useEffect(() => {
         const fetchArtist = async () => {
@@ -83,7 +83,7 @@ const ArtistsPage = () => {
                             src={artistData.image}
                             alt=""
                         />
-                        <div className='flex flex-col p-3 max-sm:flex-row md:flex-col-reverse xl:flex-col'>
+                        <div className='flex flex-col p-3 max-sm:flex-row max-sm:gap-3 md:flex-col-reverse xl:flex-col'>
                             {artistState.length > 0 && (
 
                                 <motion.button
@@ -102,13 +102,32 @@ const ArtistsPage = () => {
                                         setSelectedSongs(selected)
                                         setCurrentSong(selected[0])
                                     }}>
-                                    <BiPlay className="w-15 h-15 max-sm:w-7 max-sm:h-7" />
+                                    <BiPlay width={30} height={30} />
                                 </motion.button>
                             )
 
                             }
-                            <aside className="flex flex-col max-sm:flex-col-reverse">
-                                <figcaption className="text-transparent flex justify-end bg-gradient-to-r from-white to-cream bg-clip-text max-sm:text-sm max-sm:ml-6">
+                            <motion.button
+                                type='button'
+                                whileTap={{ rotate: 90, scale: 0.95 }}
+                                className="flex justify-center items-center text-darkcream text-sm border-2 rounded-full bg-white/30 hover:bg-white/40 cursor-pointer max-sm:hidden md:hidden xl:block xl:px-4"
+                                onClick={() => {
+                                    if (!artistData) return;
+                                    setSelectedAlbums?.(prev => {
+                                        const exists = prev.some(a => a.id === artistData.id);
+                                        if (exists) return prev;
+                                        return [...prev, {
+                                            id: artistData.id,
+                                            title: artistData.title,
+                                            image: artistData.image,
+                                        }];
+                                    });
+                                }}
+                            >
+                                 <BiPlus width={30} height={30} />
+                            </motion.button>
+                            <aside className="flex flex-col max-sm:flex-col-reverse max-sm:self-center">
+                                <figcaption className="text-transparent flex justify-end bg-gradient-to-r from-white to-cream bg-clip-text max-sm:text-[10px] max-sm:justify-start">
                                     {artistData.genre}
                                 </figcaption>
 

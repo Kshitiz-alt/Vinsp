@@ -19,7 +19,7 @@ const AlbumsPage = () => {
 
   const [playingAudio, setPlayingAudio] = useState<HTMLAudioElement>();
   const [isTitle, setTitle] = useState<string | null>(null);
-  const { setSelectedSongs, setCurrentSong , setSelectedAlbums } = useOutletContext<OutletContextType>();
+  const { setSelectedSongs, setCurrentSong, setSelectedAlbums } = useOutletContext<OutletContextType>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,47 +83,48 @@ const AlbumsPage = () => {
             <div className="flex flex-col p-3 max-sm:flex-row md:flex-col-reverse xl:flex-col">
               <div className='flex gap-4 max-sm:flex-row-reverse xl:flex-row'>
 
-              {albumItem.length > 0 && (
+                {albumItem.length > 0 && (
+                  <motion.button
+                    whileTap={{ rotate: 90, scale: 1.05 }}
+                    type='button'
+                    className=" text-darkcream flex justify-center items-center text-sm cursor-pointer bg-white/30 hover:bg-white/40 p-4 border-2 rounded-full md:hidden xl:block"
+                    onClick={() => {
+                      const selected = albumItem.map((song: selectedSongs) => ({
+                        id: song.id,
+                        title: song.title,
+                        audio: song.audio,
+                        image: song.image,
+                        artist: song.artist,
+                        duration: song.duration
+                      }))
+                      setSelectedSongs(selected)
+                      setCurrentSong(selected[0])
+                    }}>
+                    <BiPlay width={30} height={30}/>
+                  </motion.button>
+                )}
                 <motion.button
-                  whileTap={{ rotate: 90, scale: 1.05 }}
-
-                  className="w-18.5 h-18.5 text-darkcream flex justify-center items-center  cursor-pointer bg-white/30 hover:bg-white/40 p-4 border-2 rounded-full max-sm:w-13 max-sm:h-13 md:hidden xl:block xl:mb-5"
+                type='button'
+                  whileTap={{ rotate: 90, scale: 0.95 }}
+                  className="flex justify-center items-center text-darkcream text-sm border-2 rounded-full bg-white/30 hover:bg-white/40 cursor-pointer max-sm:hidden md:hidden xl:block xl:px-4"
                   onClick={() => {
-                    const selected = albumItem.map((song: selectedSongs) => ({
-                      id: song.id,
-                      title: song.title,
-                      audio: song.audio,
-                      image: song.image,
-                      artist: song.artist,
-                      duration: song.duration
-                    }))
-                    setSelectedSongs(selected)
-                    setCurrentSong(selected[0])
-                  }}>
-                  <BiPlay className="w-10 h-10 max-sm:w-7 max-sm:h-7" />
+                    if (!albumData) return;
+                    setSelectedAlbums?.(prev => {
+                      const exists = prev.some(a => a.id === albumData.id);
+                      if (exists) return prev;
+                      return [...prev, {
+                        id: albumData.id,
+                        title: albumData.title,
+                        image: albumData.image,
+                      }];
+                    });
+                  }}
+                >
+                  <BiPlus width={30} height={30} />
                 </motion.button>
-              )}
-              <motion.button
-                whileTap={{rotate:90, scale: 0.95 }}
-                className="w-18.5 h-18.5 flex justify-center items-center text-darkcream text-sm border-2 rounded-full bg-white/30 hover:bg-white/40 cursor-pointer max-sm:w-13 max-sm:h-13 md:hidden xl:block xl:px-3.5"
-                onClick={() => {
-                  if (!albumData) return;
-                  setSelectedAlbums?.(prev => {
-                    const exists = prev.some(a => a.id === albumData.id);
-                    if (exists) return prev;
-                    return [...prev, {
-                      id: albumData.id,
-                      title: albumData.title,
-                      image: albumData.image,
-                    }];
-                  });
-                }}
-              >
-                <BiPlus className='w-10 h-10'/>
-              </motion.button>
               </div>
 
-              <figcaption className="text-white text-center xl:text-4xl max-sm:text-sm max-sm:p-2.5 md:text-2xl">{ProperTitle(albumData.title)}</figcaption>
+              <figcaption className="text-white text-center xl:text-3xl xl:py-4 max-sm:text-sm max-sm:p-2.5 md:text-2xl">{ProperTitle(albumData.title)}</figcaption>
             </div>
           </figure>
         )}
