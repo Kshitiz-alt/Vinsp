@@ -17,7 +17,7 @@ const Carousel = () => {
           ids.map(id => CAROUSEL(Number(id)))
         )
         if (res) {
-          console.log("these are songs?",res)
+          console.log("these are songs?", res)
           setPlaylists(res)
         }
       }
@@ -51,8 +51,6 @@ const Carousel = () => {
               to={`/albums/${song.albumId}`} key={song.id}
             >
               <motion.div
-
-
                 className="xl:w-[420px] xl:h-58 rounded-xl overflow-hidden shadow-lg max-sm:w-[270px] max-sm:h-52 md:h-48 md:w-[240px]"
                 initial={{ opacity: .8 }}
                 whileHover={{ scale: 1.05, opacity: 10 }}
