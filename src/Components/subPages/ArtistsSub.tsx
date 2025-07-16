@@ -1,25 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion'
-import { useEffect, useState } from "react";
-import type { artistTypes } from "../../types";
-import { ARTISTS } from "../../Constants/Fetch";
+import type { artistProps  } from "../../types";
 
-const ArtistsSub = () => {
-    const [artist, setArtist] = useState<artistTypes[]>([])
-
-    useEffect(() => {
-
-        const ids = ["10001", "10002", "10003", "10004", "10006"];
-        const fetchData = async () => {
-            const res = await Promise.all(
-                ids.map(id => ARTISTS(Number(id)))
-            )
-            console.log("artistres", res)
-            setArtist(res)
-        }
-        fetchData()
-    }, [])
+const ArtistsSub = ({artist}:artistProps) => {
 
     const { t } = useTranslation()
 

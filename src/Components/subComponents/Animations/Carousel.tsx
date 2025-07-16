@@ -16,8 +16,8 @@ const Carousel = () => {
         const res = await Promise.all(
           ids.map(id => CAROUSEL(Number(id)))
         )
-        console.log("test---", res)
         if (res) {
+          console.log("these are songs?",res)
           setPlaylists(res)
         }
       }

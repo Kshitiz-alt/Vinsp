@@ -1,38 +1,16 @@
-import { useEffect, useState } from "react"
+// import { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { ALBUMS } from "../../Constants/Fetch"
-import type { albumsTypes } from "../../types"
+// import { ALBUMS } from "../../Constants/Fetch"
+
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
+import type { albumsProps } from "../../types"
 
 
 
-
-const Albums = () => {
-  const [albums, setAlbums] = useState<albumsTypes[]>([])
-
-  useEffect(() => {
-    const ids = ["1007", "1002", "1003", "1004", "1005"]
-    const fetchData = async () => {
-      const res = await Promise.all(
-        ids.map(id => ALBUMS(Number(id)))
-      )
-      const validRes = res
-        .filter(album => album?.album)
-        .map(album => (
-          {
-            id: album.album.id,
-            title: album.album.title,
-            image: album.album.image,
-          }
-        ));
-      setAlbums(validRes)
-    }
-    fetchData()
-  }, [])
+const Albums = ({albums}:albumsProps) => {
 
   const { t } = useTranslation()
-
   return (
     <section className="w-full">
       <div className="flex justify-between max-sm:bg-cream/40 max-sm:p-1 rounded-[5px]">

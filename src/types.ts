@@ -70,8 +70,8 @@ export interface selectedSongs {
 export interface albumsTypes {
     id: number;
     title: string;
-    image: string
-    artist?: string
+    image: string;
+    artist?: string;
 }
 
 export interface ArtistDataTypes {
@@ -138,4 +138,16 @@ export interface PlayProps {
     song: selectedSongs;
     onEnd: () => void;
     setSelectedSong: Dispatch<SetStateAction<selectedSongs[]>>
+}
+
+export interface albumsProps{
+  albums:albumsTypes[];
+}
+
+export interface artistProps{
+    artist:artistTypes[];
+}
+
+export interface songsProps{
+    playlists:Songtypes[];
 }

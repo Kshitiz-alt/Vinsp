@@ -1,27 +1,12 @@
-import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { SONGS } from "../../Constants/Fetch"
-import type { OutletContextType, SearchTypes, selectedSongs, Songtypes } from "../../types"
+import type { OutletContextType, SearchTypes, selectedSongs, songsProps} from "../../types"
 import { useOutletContext } from "react-router-dom"
 import { motion } from 'framer-motion'
 
-
-const NewTracksSub = () => {
+const NewTracksSub = ({playlists}:songsProps) => {
   const { t } = useTranslation()
-  const [playlists, setPlaylists] = useState<Songtypes[]>([])
+  
   const {setCurrentSong} = useOutletContext<OutletContextType>()
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await SONGS("ad", 5);
-      if (res) {
-        console.log("test",res)
-        setPlaylists(res)
-      }
-    }
-    fetchData()
-  }, [])
 
   const handlePlay = (song: SearchTypes) => {
       const selected: selectedSongs = {
@@ -35,9 +20,6 @@ const NewTracksSub = () => {
       setCurrentSong(selected)
     }
 
-
-  
-  
   return (
     <section className="w-full">
       <div className="flex justify-between items-center max-sm:bg-cream/40 max-sm:p-1 rounded-[5px]">

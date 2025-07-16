@@ -10,7 +10,7 @@ import type {
     selectedSongs,
 } from "../../types";
 import PlaylistItem from "../../Components/subComponents/PlaylistItem";
-import { BiPlay, BiPlus } from "react-icons/bi";
+import { BiPlay } from "react-icons/bi";
 
 const ArtistsPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -19,7 +19,7 @@ const ArtistsPage = () => {
     const [playingAudio, setPlayingAudio] = useState<HTMLAudioElement>();
     const [isTitle, setTitle] = useState<string | null>(null);
 
-    const { setSelectedSongs, setCurrentSong, setSelectedAlbums } = useOutletContext<OutletContextType>();
+    const { setSelectedSongs, setCurrentSong} = useOutletContext<OutletContextType>();
 
     useEffect(() => {
         const fetchArtist = async () => {
@@ -109,25 +109,7 @@ const ArtistsPage = () => {
                                 )
 
                                 }
-                                <motion.button
-                                    type='button'
-                                    whileTap={{ rotate: 90, scale: 0.95 }}
-                                    className="w-12.5 flex justify-center items-center text-darkcream text-sm border-2 p-4 rounded-full bg-white/30 hover:bg-white/40 cursor-pointer max-sm:hidden md:hidden xl:block xl:px-4"
-                                    onClick={() => {
-                                        if (!artistData) return;
-                                        setSelectedAlbums?.(prev => {
-                                            const exists = prev.some(a => a.id === artistData.id);
-                                            if (exists) return prev;
-                                            return [...prev, {
-                                                id: artistData.id,
-                                                title: artistData.title,
-                                                image: artistData.image,
-                                            }];
-                                        });
-                                    }}
-                                >
-                                    <BiPlus width={30} height={30} />
-                                </motion.button>
+                               
                             </div>
                             <aside className="flex flex-col max-sm:flex-col-reverse max-sm:self-center">
                                 <figcaption className="text-transparent flex justify-end bg-gradient-to-r from-white to-cream bg-clip-text max-sm:text-[10px] max-sm:justify-start">
