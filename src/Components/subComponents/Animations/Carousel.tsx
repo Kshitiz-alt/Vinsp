@@ -53,7 +53,7 @@ const Carousel = () => {
               <motion.div
 
 
-                className="w-[420px] xl:w-[420px] h-[240px] rounded-xl overflow-hidden shadow-lg max-sm:w-[270px] max-sm:max-h-52 md:max-h-48 md:w-[240px]"
+                className="xl:w-[420px] xl:h-58 rounded-xl overflow-hidden shadow-lg max-sm:w-[270px] max-sm:h-52 md:h-48 md:w-[240px]"
                 initial={{ opacity: .8 }}
                 whileHover={{ scale: 1.05, opacity: 10 }}
                 whileTap={{ scale: 0.95 }}

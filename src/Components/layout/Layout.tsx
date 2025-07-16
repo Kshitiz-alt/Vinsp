@@ -19,7 +19,7 @@ const Layout = () => {
   useEffect(() => {
       setTimeout(() => {
         setLoading(false)
-      },10000);
+      },11000);
   }, [])
 
   
@@ -27,7 +27,7 @@ const Layout = () => {
     return (
       <section className="h-[96.8svh] max-sm:min-w-0 w-full">
         <figure className="h-full flex justify-center items-center text-white">
-          <Loader />
+          <Loader/>
         </figure>
       </section>
     )
