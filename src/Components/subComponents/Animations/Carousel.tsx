@@ -48,7 +48,7 @@ const Carousel = () => {
         {playlists
           .map((song) => (
             <Link
-              to={`/albums/${song.albumId}`} key={song.id}
+              to={`/albums/${song.id}`} key={song.id}
             >
               <motion.div
                 className="xl:w-[420px] xl:h-58 rounded-xl overflow-hidden shadow-lg max-sm:w-[270px] max-sm:h-52 md:h-48 md:w-[240px]"
