@@ -22,7 +22,6 @@ const Loader = () => {
     };
     return (
         <AnimatePresence>
-
             {Array.from({ length: 5 }).map((_, index) => {
                 return (
                     <motion.div

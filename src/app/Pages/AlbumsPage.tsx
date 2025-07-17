@@ -100,11 +100,11 @@ const AlbumsPage = () => {
                       setSelectedSongs(selected)
                       setCurrentSong(selected[0])
                     }}>
-                    <BiPlay width={30} height={30}/>
+                    <BiPlay width={30} height={30} />
                   </motion.button>
                 )}
                 <motion.button
-                type='button'
+                  type='button'
                   whileTap={{ rotate: 90, scale: 0.95 }}
                   className="flex justify-center items-center text-darkcream text-sm border-2 rounded-full bg-white/30 hover:bg-white/40 cursor-pointer max-sm:hidden md:hidden xl:block xl:px-4"
                   onClick={() => {

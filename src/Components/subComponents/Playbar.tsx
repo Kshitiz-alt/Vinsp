@@ -1,5 +1,5 @@
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useCycle } from 'framer-motion';
 import { useEffect, useRef, useState } from "react";
 import type { PlayProps } from "../../types";
 import { ProperTime, ProperTitle } from '../../Constants/Fetch';
@@ -16,7 +16,8 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
 
     //State handling
     const audioRef = useRef<HTMLAudioElement>(null);
-    const [extendPlayer, setExtendPlayer] = useState(false);
+    // const [extendPlayer, setExtendPlayer] = useState(false);
+    const [extended,toggleExtend] = useCycle(false,true);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [isPlaying, setPlaying] = useState(false);
@@ -29,11 +30,13 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
 
     //Mounts when the player extends - fallback
     useEffect(() => {
-        if (extendPlayer) {
-            const timeout = setTimeout(() => setExtendPlayer(false), 10000)
-            return () => clearTimeout(timeout)
+        if (extended) {
+            const timeOut = setTimeout(()=>{
+                toggleExtend()
+            },10000)
+            return ()=> clearTimeout(timeOut)
         }
-    }, [extendPlayer, song]);
+    }, [extended, song, toggleExtend]);
 
     //Fetching data through audioRef for Audio data
     useEffect(() => {
@@ -54,7 +57,6 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
 
     //Fallback when the data becomes null
     useEffect(() => {
-
         const audio = audioRef.current;
         if (!audio) return;
         const handleEnd = () => {
@@ -121,110 +123,115 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
         <AnimatePresence>
             <motion.figure
                 key="playbar"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                onClick={()=>toggleExtend()}
+                initial={false}
+                animate={extended ? "expanded" : "collapsed"}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 1, type: "tween" }}
-
-
+                transition={{ duration: 1 , type:"spring"}}
+                variants={{
+                    collapsed: {
+                        width: "72px",
+                        borderRadius: "9999px",
+                    },
+                    expanded: {
+                        width:"60%",
+                    }
+                }}
                 className={`fixed z-40 bg-Gray/50 backdrop-blur-2xl inset-shadow-2xs inset-shadow-cream h-18 p-3 rounded-full flex items-center gap-2 transition-all duration-200 ease-in-out
-                    ${extendPlayer ? "xl:w-7/12 cursor-default max-sm:w-11/12 md:w-8/12" : "w-18 cursor-pointer"}
-                    ${extend ? "bottom-10 right-20" : "bottom-10 xl:left-20 max-sm:left-3 md:left-5"}
+                     ${extended ? " cursor-default max-sm:min-w-fit md:w-8/12 xl:w-full" : "w-18 cursor-pointer"}
+                      ${extend ? "bottom-10 right-20" : "bottom-10 xl:left-20 max-sm:left-3 md:left-5"}
                     `}
-                onClick={() => {
-                    setExtendPlayer(!extendPlayer)
-
-                }
-                }
-            >
+                    >
                 <img className="w-12 h-12 rounded-full object-center object-cover shadow-2xs shadow-cream" src={song.image} alt="" />
-                {extendPlayer && (
-                    <div className='flex xl:gap-5 max-sm:gap-3 md:gap-5 items-center'>
-                        <div className='flex xl:flex-row max-sm:flex-col md:flex-col max-sm:gap-2 md:gap-2'>
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 2 }}
-                                className="flex flex-col">
-                                <p className="text-white xl:text-lg xl:w-96 max-sm:w-30 md:w-70 max-sm:line-clamp-1 md:line-clamp-1 max-sm:text-sm md:text-sm">{ProperTitle(song.title)}</p>
-                                <span className='text-cream xl:text-sm max-sm:text-[12px] md:text-[12px]'>{song.artist}</span>
-                            </motion.div>
-                            <motion.div
-                                className='flex items-center gap-3 text-white text-[12px]'
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 2 }}
-                            >
-                                <span className='xl:flex xl:text-nowrap max-sm:hidden md:hidden'>{ProperTime(currentTime)}</span>
+               
+                {extended && (
 
-                                <input
-                                    className='cursor-pointer xl:w-full rangeSM md:w-3/4'
-                                    type="range"
-                                    min={0}
-                                    max={duration || 0}
-                                    value={currentTime}
-                                    onChange={handleSeek}
-                                />
-                                <span className='xl:flex xl:text-nowrap max-sm:hidden md:hidden'>{ProperTime(duration)}</span>
-                            </motion.div>
-                        </div>
-
-                        <motion.button
+                <div className='flex xl:gap-5 max-sm:gap-2 md:gap-5 items-center'>
+                    <div className='flex xl:flex-row max-sm:flex-col md:flex-col max-sm:gap-2 md:gap-2'>
+                        <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 2 }}
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                onPlayHandle()
-                            }}
-                            className='cursor-pointer text-white'>
-                            {isPlaying ? <LuPause size={25} /> : <LuPlay size={25} />}
-                        </motion.button>
-                        <input
-                            className="h-4 w-4 appearance-none bg-white checked:rounded-full checked:bg-green-300 transition-all duration-300 ease-in-out rounded-[3px]"
-                            type='checkbox'
-                            onChange={(e) => {
-                                e.stopPropagation()
-                                const isChecked = e.target.checked;
+                            className="flex flex-col">
+                            <p className="text-white xl:text-lg xl:w-96 max-sm:w-30 md:w-70 max-sm:line-clamp-1 md:line-clamp-1 max-sm:text-sm md:text-sm">{ProperTitle(song.title)}</p>
+                            <span className='text-cream xl:text-sm max-sm:text-[12px] md:text-[12px]'>{song.artist}</span>
+                        </motion.div>
+                        <motion.div
+                            className='flex items-center gap-3 text-white text-[12px]'
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 2 }}
+                        >
+                            <span className='xl:flex xl:text-nowrap max-sm:text-nowrap max-sm:text-[8px] md:hidden'>{ProperTime(currentTime)}</span>
 
-                                const songSet = {
-                                    title: song.title,
-                                    audio: song.audio,
-                                    image: song.image
-                                }
-                                setSelectedSong((prev) => {
-                                    if (isChecked) return [...prev, songSet];
-                                    return prev.filter((s) => s.audio !== songSet.audio);
-                                });
-                            }}
-
-                        />
-
-
-
-
-                        {/*Hidden for Phone users*/}
-                        <button
-                            className='cursor-pointer xl:flex max-sm:hidden md:hidden'
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                VolumeUp()
-                            }}>
-
-                            <BiVolumeFull size={30} className='hover:text-cream' />
-                        </button>
-                        <button
-                            className='cursor-pointer xl:flex max-sm:hidden md:hidden'
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                VolumeDown()
-                            }}>
-                            <BiVolumeLow size={30} className='hover:text-cream' />
-                        </button>
+                            <input
+                                className='cursor-pointer xl:w-full rangeSM md:w-3/4'
+                                type="range"
+                                min={0}
+                                max={duration || 0}
+                                value={currentTime}
+                                onChange={handleSeek}
+                            />
+                            <span className='xl:flex xl:text-nowrap max-sm:text-nowrap max-sm:text-[8px]  md:hidden'>{ProperTime(duration)}</span>
+                        </motion.div>
                     </div>
+
+                    <motion.button
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 2 }}
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            onPlayHandle()
+                        }}
+                        className='cursor-pointer text-white'>
+                        {isPlaying ? <LuPause size={25} /> : <LuPlay size={25} />}
+                    </motion.button>
+                    <input
+                        className="h-4 w-4 appearance-none bg-white checked:rounded-full checked:bg-green-300 transition-all duration-300 ease-in-out rounded-[3px] max-sm:hidden"
+                        type='checkbox'
+                        onChange={(e) => {
+                            e.stopPropagation()
+                            const isChecked = e.target.checked;
+
+                            const songSet = {
+                                title: song.title,
+                                audio: song.audio,
+                                image: song.image
+                            }
+                            setSelectedSong((prev) => {
+                                if (isChecked) return [...prev, songSet];
+                                return prev.filter((s) => s.audio !== songSet.audio);
+                            });
+                        }}
+
+                    />
+
+
+
+
+                    {/*Hidden for Phone users*/}
+                    <button
+                        className='cursor-pointer xl:flex max-sm:hidden md:hidden'
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            VolumeUp()
+                        }}>
+
+                        <BiVolumeFull size={30} className='hover:text-cream' />
+                    </button>
+                    <button
+                        className='cursor-pointer xl:flex max-sm:hidden md:hidden'
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            VolumeDown()
+                        }}>
+                        <BiVolumeLow size={30} className='hover:text-cream' />
+                    </button>
+                </div>
                 )}
                 <audio ref={audioRef} autoPlay className='bg-white w-60' onTimeUpdate={handleUpdate} onLoadedMetadata={handleUpdate}></audio>
             </motion.figure>

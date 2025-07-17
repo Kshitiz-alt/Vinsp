@@ -15,7 +15,6 @@ function App() {
   return (
     <>
       <AnimatePresence mode='wait'>
-
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
