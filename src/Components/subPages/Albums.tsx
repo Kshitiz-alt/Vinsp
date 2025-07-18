@@ -8,7 +8,7 @@ import type { albumsProps } from "../../types"
 
 
 
-const Albums = ({albums}:albumsProps) => {
+const Albums = ({ albums }: albumsProps) => {
 
   const { t } = useTranslation()
   return (
@@ -19,16 +19,19 @@ const Albums = ({albums}:albumsProps) => {
       <div className="grid grid-cols-5 gap-7 p-5 xl:gap-10 max-sm:gap-35 md:gap-55 overflow-x-scroll">
         {albums.map((album) => (
           <Link to={`/albums/${album.id}`} key={album.id} >
-
-            <motion.img
+            <motion.figure
               whileHover={{
                 scale: 1.05,
                 transition: { duration: 0.3, ease: "easeInOut" }
               }}
+            >
 
-              className="xl:w-[400px] xl:h-[240px] bg-gray-900 object-cover object-center rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:min-h-32 max-sm:min-w-32 md:min-w-45 md:min-h-45"
-              src={album.image}
-              alt="" />
+              <img
+                className="xl:w-[400px] xl:h-[240px] bg-gray-900 object-cover object-center rounded-xl overflow-hidden shadow-lg cursor-pointer max-sm:min-h-32 max-sm:min-w-32 md:min-w-45 md:min-h-45"
+                src={album.image}
+                alt="" />
+              <figcaption className="text-white text-sm text-center max-sm:text-[10px] whitespace-nowrap">{album.title}</figcaption>
+            </motion.figure>
           </Link>
         ))}
       </div>
