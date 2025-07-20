@@ -6,9 +6,9 @@ import { useLocation } from "react-router-dom"
 
 
 
-export const SONGS = async (query: string, limit: number) => {
+export const SONGS = async (query: string, limit: number,page:number) => {
     try {
-        const Songs = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/songs?query=${query}&limit=${limit}`)
+        const Songs = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/songs?query=${query}&limit=${limit}&page=${page}`)
         console.log(Songs)
         return Songs.data;
     } catch (error) {
@@ -46,12 +46,12 @@ export const ARTISTS = async (id:number) => {
     }
 }
 
-export const SEARCH = async (query: string) => {
+export const SEARCH = async (query: string,page:number,limit:number) => {
     try {
         const [res1, res2,res3] = await Promise.all([
-            axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/albums?query=${query}`),
-            axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/songs?query=${query}`),
-            axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/artists?query=${query}`)
+            axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/albums?query=${query}&page=${page}&limit=${limit}`),
+            axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/songs?query=${query}&limit=${limit}&page=${page}`),
+            axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/artists?query=${query}&limit=${limit}&page=${page}`)
         ]);
         return {
             dataOfAlbums: res1,

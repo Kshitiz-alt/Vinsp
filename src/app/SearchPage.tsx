@@ -36,11 +36,11 @@ const SearchPage = () => {
     if (!query.trim()) return
     const data = async () => {
       try {
-        const { dataOfAlbums, dataOfSongs, dataOfArtist } = await SEARCH(query)
-        setSearched(dataOfSongs.data)
-        setAlbumState(dataOfAlbums.data[0])
-        setArtistData(dataOfArtist.data[0])
-        console.log("artists", dataOfArtist.data[0])
+        const { dataOfAlbums, dataOfSongs, dataOfArtist } = await SEARCH(query,1,10)
+        setSearched(dataOfSongs.data.result)
+        setAlbumState(dataOfAlbums.data.result[0])
+        setArtistData(dataOfArtist.data.result[0])
+        console.log("artists", dataOfArtist.data)
       } catch (error) {
         console.error('searched data not found', error)
       }

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 
 const NewTracksSub = ({playlists}:songsProps) => {
   const { t } = useTranslation()
+
   
   const {setCurrentSong} = useOutletContext<OutletContextType>()
 

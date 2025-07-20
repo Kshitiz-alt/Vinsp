@@ -32,9 +32,10 @@ const Mainpage = () => {
 
     const fetchData = async () => {
       try {
-        const res = await SONGS("ad", 5);
+        const res = await SONGS("ad",5,1);
         if (res) {
-          setPlaylists(res)
+          setPlaylists(res.result)
+          console.log("data",res.result)
         }
 
         const albumResponse = await Promise.all(
