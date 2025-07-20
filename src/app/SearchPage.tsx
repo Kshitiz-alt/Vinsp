@@ -40,7 +40,7 @@ const SearchPage = () => {
         setSearched(dataOfSongs.data.result)
         setAlbumState(dataOfAlbums.data.result[0])
         setArtistData(dataOfArtist.data.result[0])
-        console.log("artists", dataOfArtist.data)
+        console.log("albums", dataOfAlbums.data)
       } catch (error) {
         console.error('searched data not found', error)
       }

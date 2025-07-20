@@ -37,16 +37,11 @@ const Loader = () => {
                             duration: 1,
                             delay: index * 0.1
                         }}
-
                     >
-
                     </motion.div>
                 )
-
             })}
         </AnimatePresence>
-
-
     )
 }
 
