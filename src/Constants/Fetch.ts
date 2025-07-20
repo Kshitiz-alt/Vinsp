@@ -40,8 +40,6 @@ export const ARTISTS = async (id:number) => {
 
     try {
         const data = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/artists/${id}/songs`)
-            // axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/artists/${id}/songs`)
-
         return data.data
     } catch (error) {
         console.error("Couldn't fetch artists", error)
@@ -56,7 +54,7 @@ export const SEARCH = async (query: string) => {
             axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/search/artists?query=${query}`)
         ]);
         return {
-            dataFetched: res1,
+            dataOfAlbums: res1,
             dataOfSongs: res2,
             dataOfArtist: res3
         };

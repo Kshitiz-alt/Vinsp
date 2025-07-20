@@ -19,7 +19,7 @@ const ArtistsPage = () => {
     const [playingAudio, setPlayingAudio] = useState<HTMLAudioElement>();
     const [isTitle, setTitle] = useState<string | null>(null);
 
-    const { setSelectedSongs, setCurrentSong} = useOutletContext<OutletContextType>();
+    const { setSelectedSongs, setCurrentSong } = useOutletContext<OutletContextType>();
 
     useEffect(() => {
         const fetchArtist = async () => {
@@ -76,7 +76,12 @@ const ArtistsPage = () => {
 
             {/* Artist Image & Name */}
             {artistData && (
-                <div>
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 2.5, ease: "easeInOut" }}
+                >
                     <figure className="relative top-30 flex flex-row-reverse items-end gap-2 max-sm:flex-col max-sm:items-center">
                         <img
                             className="xl:w-[384px] rounded-2xl shadow-sm max-sm:w-11/12 shadow-cream md:w-1/4"
@@ -109,7 +114,7 @@ const ArtistsPage = () => {
                                 )
 
                                 }
-                               
+
                             </div>
                             <aside className="flex flex-col max-sm:flex-col-reverse max-sm:self-center">
                                 <figcaption className="text-transparent flex justify-end bg-gradient-to-r from-white to-cream bg-clip-text max-sm:text-[10px] max-sm:justify-start">
@@ -122,11 +127,16 @@ const ArtistsPage = () => {
                             </aside>
                         </div>
                     </figure>
-                </div>
+                </motion.div>
             )}
 
             {/* Song List */}
-            <aside className="w-3/4 flex flex-col gap-4 py-30 relative max-sm:w-full max-sm:top-20 md:w-full md:top-30 xl:top-0">
+            <motion.aside
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 2.5, ease: "easeInOut" }}
+                className="w-3/4 flex flex-col gap-4 py-30 relative max-sm:w-full max-sm:top-20 md:w-full md:top-30 xl:top-0">
                 {artistState.map((element, index) => (
                     <PlaylistItem
                         key={element.id}
@@ -150,7 +160,7 @@ const ArtistsPage = () => {
                         }}
                     />
                 ))}
-            </aside>
+            </motion.aside>
         </section>
     );
 };

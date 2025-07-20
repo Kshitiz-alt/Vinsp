@@ -10,7 +10,7 @@ const ArtistsSub = ({artist}:artistProps) => {
     return (
         <section className="w-full">
             <div className="flex justify-between items-center max-sm:bg-cream/40 max-sm:p-1 rounded-[5px]">
-                <h1 className="text-white text-2xl max-sm:text-lg">{t('artistTrack')}</h1>
+                <h1 className="text-white text-3xl max-sm:text-lg">{t('artistTrack')}</h1>
             </div>
             <div className="grid grid-cols-5 gap-7 p-5 xl:gap-10  max-sm:gap-35 md:gap-55 overflow-x-scroll">
                 {artist.map((userName) => (

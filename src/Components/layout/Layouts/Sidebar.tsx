@@ -37,7 +37,7 @@ const Sidebar = ({ selectedSongs , selectedAlbums}: siderbarProps) => {
         <div className="py-10 flex flex-col gap-2">
           {selectedSongs.map((song, index) => (
             <div className="flex gap-5 space-y-5 hover:bg-cream/10 p-1 hover:rounded-2xl" key={index}>
-              <img className="w-1/4 rounded-2xl" src={song.image} alt="" />
+              <img className="w-1/4 h-20 rounded-2xl object-center object-cover" src={song.image} alt="" />
               <span className="text-red-300">{ProperTitle(song.title)}</span>
             </div>
           ))}
