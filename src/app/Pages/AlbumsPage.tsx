@@ -26,10 +26,9 @@ const AlbumsPage = () => {
       if (!id) return
       // console.log("id!", id)
       const res = await ALBUMS(Number(id))
-      console.log("songssss", res.songs)
-      if (res && res.album && res.songs)
+      if (res && res.album && res.result)
         setAlbumData(res.album);
-      setAlbumItem(res.songs);
+      setAlbumItem(res.result);
     }
     fetchData()
   }, [id]);
@@ -66,8 +65,6 @@ const AlbumsPage = () => {
 
   return (
     <section
-
-
       className={`relative flex  px-30 xl:flex-col xl:gap-10 max-sm:flex-col max-sm:px-0 max-sm:min-h-[100svh] md:min-h-[100svh] md:flex-col`}>
       {albumData?.image && (
         <figure className="fixed inset-0 bg-cover bg-no-repeat blur-[10px] max-sm:bg-center md:bg-center xl:bg-center"
@@ -147,6 +144,7 @@ const AlbumsPage = () => {
             duration={element.duration}
             title={element.title}
             image={element.image}
+            // lyrics={element.lyrics}
             audio={element.audio}
             onAudioPlay={(audio) => handleNewAudio(audio, element.title, element)}
             isCurrent={isTitle === element.title}

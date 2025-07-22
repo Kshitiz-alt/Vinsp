@@ -53,6 +53,7 @@ const PlaylistItem = ({S_no, duration, artist, onSelect, title, audio, image, is
                         >
                             {ChangedTitle}
                         </p>
+                        {/* <p className="text-white">{lyrics}</p> */}
                         <div className="flex gap-2">
                             <LuMicVocal size={20} className="max-sm:hidden md:hidden" color="red" />
                             {/* <Artist artists={artists} /> */}

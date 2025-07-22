@@ -28,7 +28,7 @@ export const CAROUSEL = async(id:number) => {
 
 export const ALBUMS = async (id:number) => {
     try {
-        const Songs = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/albums/${id}`)
+        const Songs = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/albums/${id}/songs`)
         // console.log(Songs)
         return Songs.data
     } catch (error) {

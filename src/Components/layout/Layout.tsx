@@ -19,7 +19,7 @@ const Layout = () => {
   useEffect(() => {
       setTimeout(() => {
         setLoading(false)
-      },11000);
+      },1000);
   }, [])
 
   

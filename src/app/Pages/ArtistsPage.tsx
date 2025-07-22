@@ -143,6 +143,7 @@ const ArtistsPage = () => {
                         S_no={index + 1}
                         duration={element.duration}
                         title={element.title}
+                        // lyrics={element.lyrics}
                         image={element.image}
                         audio={element.audio}
                         artist={element.artist}

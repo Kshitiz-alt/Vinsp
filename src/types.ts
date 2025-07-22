@@ -31,6 +31,7 @@ export interface Songtypes {
 
 export interface AlbumItenary {
     S_no:number;
+    // lyrics:string;
     duration: number;
     title: string;
     audio: string;
@@ -43,6 +44,7 @@ export interface AlbumItenary {
 
 export interface PlaylistItemTypes {
     id: number;
+    // lyrics:string;
     albumId: number;
     name: string;
     image: string;
@@ -91,6 +93,7 @@ export interface artistTypes {
 export interface artistStateTypes {
     duration: number;
     id: number;
+    // lyrics:string;
     albumId: number;
     title: string;
     image: string;
