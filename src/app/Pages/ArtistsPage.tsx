@@ -26,9 +26,9 @@ const ArtistsPage = () => {
             if (!id) return;
             const data = await ARTISTS(Number(id));
             if (data) {
-                console.log(data)
-                setArtistData(data);
-                setArtistState(data.songs || []);
+                console.log(data.songs.rows)
+                setArtistData(data.rows[0]);
+                setArtistState(data.songs.rows || []);
             }
         };
         fetchArtist();
