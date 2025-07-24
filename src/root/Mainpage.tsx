@@ -32,34 +32,46 @@ const Mainpage = () => {
 
     const fetchData = async () => {
       try {
-        const res = await SONGS("ad",5,1);
+        const res = await SONGS("ad", 5, 1);
         if (res) {
           setPlaylists(res.result)
-          console.log("data",res.result)
+          console.log("data", res.result)
         }
 
         const albumResponse = await Promise.all(
           ids.map(id => ALBUMS(Number(id)))
         )
         const validRes = albumResponse
-          .filter(album => album?.album)
-          .map(album => (
-            {
-              id: album.album.id,
-              title: album.album.title,
-              image: album.album.image,
+          .filter(album => album?.album?.rows?.length > 0)
+          .map(album => {
+            const rows = album.album.rows[0];
+            return {
+              id: rows.id,
+              title: rows.title,
+              image: rows.image,
             }
-          ));
+          });
+        console.log("valid res", validRes)
         setAlbums(validRes);
 
         const artistResponse = await Promise.all(
           idOfArtists.map(id => ARTISTS(Number(id)))
         )
-        console.log("artistres", artistResponse)
-        setArtist(artistResponse)
+        const validArtists = artistResponse
+          .filter(artist => artist?.rows?.length > 0)
+          .map(artist => {
+            const rows = artist.rows[0];
+            return {
+              id: rows.id,
+              title: rows.title,
+              image: rows.image,
+            }
+          });
+        console.log("artistres", validArtists)
+        setArtist(validArtists)
       } catch (err) {
         console.error(err)
-      } 
+      }
     }
     fetchData()
   }, [])

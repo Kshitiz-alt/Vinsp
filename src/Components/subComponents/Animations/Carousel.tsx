@@ -16,10 +16,10 @@ const Carousel = () => {
         const res = await Promise.all(
           ids.map(id => CAROUSEL(Number(id)))
         )
-        if (res) {
+        const formatted = res.map(result => result.rows?.[0]);        
           console.log("these are songs?", res)
-          setPlaylists(res)
-        }
+          setPlaylists(formatted)
+        
       }
       fetchData()
     } catch {

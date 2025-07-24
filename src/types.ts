@@ -26,7 +26,7 @@ export interface Songtypes {
     year?: string;
     image?: string;
     audio: string
-    artist: string
+    artist?: string
 }
 
 export interface AlbumItenary {
@@ -86,8 +86,8 @@ export interface ArtistDataTypes {
 export interface artistTypes {
     id: number;
     title?: string;
-    image: string;
-    artist: { id: number, title: string, image: string }
+    image?: string;
+    artist?:string;
 }
 
 export interface artistStateTypes {

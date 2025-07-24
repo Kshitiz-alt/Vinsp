@@ -27,7 +27,8 @@ const AlbumsPage = () => {
       // console.log("id!", id)
       const res = await ALBUMS(Number(id))
       if (res && res.album && res.result)
-        setAlbumData(res.album);
+      console.log("albums?",res.result)
+        setAlbumData(res.album.rows[0]);
       setAlbumItem(res.result);
     }
     fetchData()
