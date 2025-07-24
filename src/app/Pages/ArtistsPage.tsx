@@ -11,11 +11,13 @@ import type {
 } from "../../types";
 import PlaylistItem from "../../Components/subComponents/PlaylistItem";
 import { BiPlay } from "react-icons/bi";
+import Loader from '../../Components/subComponents/Animations/Loader';
 
 const ArtistsPage = () => {
     const { id } = useParams<{ id: string }>();
     const [artistState, setArtistState] = useState<artistStateTypes[]>([]);
     const [artistData, setArtistData] = useState<ArtistDataTypes | null>(null);
+    const [loading,setLoading] = useState(true)
     const [playingAudio, setPlayingAudio] = useState<HTMLAudioElement>();
     const [isTitle, setTitle] = useState<string | null>(null);
 
@@ -24,14 +26,24 @@ const ArtistsPage = () => {
     useEffect(() => {
         const fetchArtist = async () => {
             if (!id) return;
-            const data = await ARTISTS(Number(id));
-            if (data) {
-                console.log(data.songs.rows)
-                setArtistData(data.rows[0]);
-                setArtistState(data.songs.rows || []);
+            setLoading(true)
+            try{
+
+                const data = await ARTISTS(Number(id));
+                if (data) {
+                    console.log(data.songs.rows)
+                    setArtistData(data.rows[0]);
+                    setArtistState(data.songs.rows || []);
+                }
+            }catch(err){
+                console.error("error while fetching artists",err)
+
+            }finally{
+                setLoading(false)
             }
         };
         fetchArtist();
+        
     }, [id]);
 
     useEffect(() => {
@@ -62,6 +74,16 @@ const ArtistsPage = () => {
         };
         setCurrentSong(selected);
     };
+  
+  if (loading) {
+    return (
+      <section className="h-[96.8svh] max-sm:min-w-0 w-full">
+        <figure className="h-full flex justify-center items-center text-white ">
+          <Loader/>
+        </figure>
+      </section>
+    )
+  }
 
     return (
         <section className="relative flex px-30 xl:flex-col xl:gap-10 max-sm:flex-col max-sm:px-0 max-sm:min-h-[100svh] md:min-h-[100svh] md:flex-col">

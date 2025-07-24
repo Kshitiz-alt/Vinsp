@@ -9,6 +9,7 @@ import type {
 } from "../../types"
 import PlaylistItem from "../../Components/subComponents/PlaylistItem"
 import { BiPlay, BiPlus } from "react-icons/bi"
+import Loader from '../../Components/subComponents/Animations/Loader'
 
 
 
@@ -16,7 +17,7 @@ const AlbumsPage = () => {
   const { id } = useParams<{ id: string }>()
   const [albumItem, setAlbumItem] = useState<PlaylistItemTypes[]>([]);
   const [albumData, setAlbumData] = useState<albumsTypes | null>(null);
-
+  const [loading , setLoading] = useState(true)
   const [playingAudio, setPlayingAudio] = useState<HTMLAudioElement>();
   const [isTitle, setTitle] = useState<string | null>(null);
   const { setSelectedSongs, setCurrentSong, setSelectedAlbums } = useOutletContext<OutletContextType>();
@@ -24,12 +25,18 @@ const AlbumsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (!id) return
-      // console.log("id!", id)
-      const res = await ALBUMS(Number(id))
-      if (res && res.album && res.result)
-      console.log("albums?",res.result)
-        setAlbumData(res.album.rows[0]);
-      setAlbumItem(res.result);
+      setLoading(true)
+      try{
+        const res = await ALBUMS(Number(id))
+        if (res && res.album && res.result)
+        console.log("albums?",res.result)
+          setAlbumData(res.album.rows[0]);
+        setAlbumItem(res.result);
+      }catch(err){
+        console.error("error while fetching albums",err)
+      }finally{
+        setLoading(false)
+      }
     }
     fetchData()
   }, [id]);
@@ -63,6 +70,18 @@ const AlbumsPage = () => {
     setCurrentSong(selected);
 
   };
+ 
+
+
+  if (loading) {
+    return (
+      <section className="h-[96.8svh] max-sm:min-w-0 w-full">
+        <figure className="h-full flex justify-center items-center text-white">
+          <Loader/>
+        </figure>
+      </section>
+    )
+  }
 
   return (
     <section
