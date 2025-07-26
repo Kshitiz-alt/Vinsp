@@ -154,3 +154,7 @@ export interface artistProps{
 export interface songsProps{
     playlists:Songtypes[];
 }
+
+export interface carouselTypes {
+    carousel:Songtypes[];
+}

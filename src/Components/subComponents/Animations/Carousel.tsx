@@ -1,41 +1,21 @@
 import { useEffect, useState } from "react"
-import { CAROUSEL } from "../../../Constants/Fetch"
-import type { Songtypes } from "../../../types"
+
+import type { carouselTypes } from "../../../types"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 
-const Carousel = () => {
-  const [playlists, setPlaylists] = useState<Songtypes[]>([])
+const Carousel = ({carousel}:carouselTypes) => {
   const [currentIndex, setCurrentIndex] = useState(0)
-
-  // Fetch data
+  
   useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const ids = ["1007", "1002", "1003", "1004", "1005", "1006", "1008", "1009", "1010", "1011"];
-        const res = await Promise.all(
-          ids.map(id => CAROUSEL(Number(id)))
-        )
-        const formatted = res.map(result => result.rows?.[0]);        
-          console.log("these are songs?", res)
-          setPlaylists(formatted)
-        
-      }
-      fetchData()
-    } catch {
-      console.error("Failed to fetch")
-    }
-  }, [])
-
-  useEffect(() => {
-    if (playlists.length < 2) return
+    if (carousel.length < 2) return
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % playlists.length)
+      setCurrentIndex((prev) => (prev + 1) % carousel.length)
     }, 3000)
 
     return () => clearInterval(interval)
 
-  }, [playlists])
+  }, [carousel])
 
   return (
     <section className="w-full overflow-hidden rounded-3xl py-22 p-5 max-sm:py-25 md:p-22">
@@ -45,7 +25,7 @@ const Carousel = () => {
         animate={{ x: `-${currentIndex * 304}px` }}
         transition={{ duration: 0.6, ease: "easeInOut", type: "spring", stiffness: 50 }}
       >
-        {playlists
+        {carousel
           .map((song) => (
             <Link
               to={`/albums/${song.id}`} key={song.id}
