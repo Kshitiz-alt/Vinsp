@@ -40,6 +40,7 @@ const AlbumsPage = () => {
     }
     fetchData()
   }, [id]);
+  
 
   useEffect(() => {
     return () => {

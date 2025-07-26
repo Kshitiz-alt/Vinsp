@@ -41,17 +41,28 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
     //Fetching data through audioRef for Audio data
     useEffect(() => {
         const audio = audioRef.current;
-        if (audio && song.audio) {
-            audio.src = song.audio;
-            setDuration(0);
-            setCurrentTime(0);
-            setPlaying(false);
-        }
+        try {
 
-        return () => {
-            if (audio) {
-                audio.pause()
+            if (audio && song.audio) {
+                audio.src = song.audio;
+                setDuration(0);
+                setCurrentTime(0);
+                setPlaying(false);
+
+                audio.play().then(() => {
+                    setPlaying(true);
+                }).catch((err) => {
+                    console.warn("audioRef:", err)
+                })
             }
+
+            return () => {
+                if (audio) {
+                    audio.pause()
+                }
+            }
+        } catch (err) {
+            console.error("playbar Error:",err)
         }
     }, [song]);
 
@@ -250,7 +261,7 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
                     </div>
                 )}
 
-                <audio ref={audioRef} autoPlay className='bg-white w-60' onTimeUpdate={handleUpdate} onLoadedMetadata={handleUpdate}></audio>
+                <audio ref={audioRef} className='bg-white w-60' onTimeUpdate={handleUpdate} onLoadedMetadata={handleUpdate}></audio>
             </motion.figure>
         </AnimatePresence>
     )

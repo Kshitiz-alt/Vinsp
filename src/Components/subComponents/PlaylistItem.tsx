@@ -1,7 +1,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import type { AlbumItenary } from "../../types"
-import { LuMicVocal } from "react-icons/lu"
 import { ProperTime, ProperTitle } from "../../Constants/Fetch"
 
 
@@ -45,7 +44,7 @@ const PlaylistItem = ({S_no, duration, artist, onSelect, title, audio, image, is
                 <figure className="flex max-sm:flex max-sm:gap-2 max-sm:w-2/3 md:gap-10">
                     <span className={`w-0 text-nowrap text-cream self-center md:text-sm xl:text-sm ${isCurrent ? "text-white" : ""}`}>{S_no}</span>
                     <img className="w-10 h-10 object-cover object-center absolute left-9 max-sm:w-7 max-sm:h-7 max-sm:left-5 max-sm:self-center md:w-10 md:self-center xl:self-center rounded-full" src={image} alt="" />
-                    <aside className="px-13 max-sm:px-10 max-sm:flex-col max-sm:gap-2 md:px-10 xl:flex">
+                    <aside className="px-13 max-sm:px-10 max-sm:flex-col max-sm:gap-2 md:px-10 xl:flex xl:gap-3">
                         <p
                             onMouseEnter={() => setHover(true)}
                             onMouseLeave={() => setHover(false)}
@@ -54,8 +53,8 @@ const PlaylistItem = ({S_no, duration, artist, onSelect, title, audio, image, is
                             {ChangedTitle}
                         </p>
                         {/* <p className="text-white">{lyrics}</p> */}
-                        <div className="flex gap-2">
-                            <LuMicVocal size={20} className="max-sm:hidden md:hidden" color="red" />
+                        <div className="flex gap-10">
+                            {/* <LuMicVocal size={20} className="max-sm:hidden md:hidden" color="red" /> */}
                             {/* <Artist artists={artists} /> */}
                             <span className="text-white self-center w-58 max-sm:text-[9px] md:text-[12px] xl:text-sm">{artist}</span>
                         </div>

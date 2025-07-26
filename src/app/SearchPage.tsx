@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import type { OutletContextType, SearchAlbumTypes, SearchArtistTypes, SearchTypes, selectedSongs } from "../types";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Loader from "../Components/subComponents/Animations/Loader";
 
 
 const SearchPage = () => {
@@ -11,6 +12,7 @@ const SearchPage = () => {
   const { t } = useTranslation();
   const query = useQuery().get('query') || "";
   const [searched, setSearched] = useState<SearchTypes[]>([]);
+  const [loading, setLoading] = useState(true)
   const [albumState, setAlbumState] = useState<SearchAlbumTypes | null>(null);
   const [artistData, setArtistData] = useState<SearchArtistTypes | null>(null);
   const { setCurrentSong } = useOutletContext<OutletContextType>()
@@ -28,25 +30,37 @@ const SearchPage = () => {
 
   useEffect(() => {
     if (!query.trim()) {
-      navigate('/')
+      return console.log("query trim in data fetch", query)
     }
   }, [query, navigate]);
 
   useEffect(() => {
-    if (!query.trim()) return
+    setLoading(true)
     const data = async () => {
       try {
-        const { dataOfAlbums, dataOfSongs, dataOfArtist } = await SEARCH(query,1,10)
+        const { dataOfAlbums, dataOfSongs, dataOfArtist } = await SEARCH(query, 1, 10)
         setSearched(dataOfSongs.data.result)
         setAlbumState(dataOfAlbums.data.result[0])
         setArtistData(dataOfArtist.data.result[0])
-        console.log("albums", dataOfAlbums.data)
+        console.log("songs", dataOfSongs.data.result)
       } catch (error) {
         console.error('searched data not found', error)
+      } finally {
+        setLoading(false)
       }
     }
     data()
   }, [query]);
+
+  if (loading) {
+    return (
+      <section className="h-[96.8svh] max-sm:min-w-0 w-full">
+        <figure className="h-full flex justify-center items-center text-white ">
+          <Loader />
+        </figure>
+      </section>
+    )
+  }
 
   return (
     <motion.section
@@ -81,7 +95,7 @@ const SearchPage = () => {
           {searched.map((element) => (
             <div className="justify-between max-w-full max-h-30 bg-Gray/10 p-2 rounded-2xl hover:bg-cream/10 cursor-pointer" key={element.id} onClick={() => handlePlay(element)}>
               <figure className="flex gap-2">
-                <img className=" rounded-2xl object-cover max-sm:max-w-2/7 md:max-w-1/7 xl:max-w-1/7" src={element.image} alt="" />
+                <img className=" rounded-2xl object-cover object-center max-sm:max-w-2/7 md:max-w-1/7 xl:max-w-1/7" src={element.image} alt="" />
                 {/* For mobile users */}
                 <aside className="flex xl:flex-row max-sm:flex-col max-sm:gap-2 md:flex-col">
                   {/* For all devices */}
