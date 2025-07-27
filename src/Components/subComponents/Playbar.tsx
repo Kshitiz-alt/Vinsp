@@ -156,7 +156,7 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
                     }
                 }}
                 className={`fixed z-40 bg-Gray/50 backdrop-blur-2xl inset-shadow-2xs inset-shadow-cream h-18 p-3 rounded-full flex items-center gap-2 transition-all duration-200 ease-in-out
-                     ${extended ? " cursor-default max-sm:min-w-fit md:w-8/12 xl:w-full" : "w-18 cursor-pointer"}
+                     ${extended ? " cursor-default max-sm:min-w-11/12 md:w-8/12 xl:w-full" : "w-18 cursor-pointer"}
                       ${extend ? "bottom-10 right-20" : "bottom-10 xl:left-20 max-sm:left-3 md:left-5"}
                     `}
 
@@ -166,7 +166,7 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
 
 
                 {extended && (
-                    <div className='flex xl:gap-5 max-sm:gap-2 md:gap-5 items-center'>
+                    <div className='flex justify-between xl:gap-5 max-sm:justify-between md:gap-5 items-center'>
                         <div className='flex xl:flex-row max-sm:flex-col md:flex-col max-sm:gap-2 md:gap-2'>
                             <motion.div
                                 initial={{ opacity: 0 }}
