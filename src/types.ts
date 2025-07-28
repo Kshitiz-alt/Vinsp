@@ -2,9 +2,9 @@ import type { Dispatch, SetStateAction } from "react";
 
 export interface OutletContextType {
     selectedSongs: selectedSongs[],
-    currentSong:selectedSongs | null;
-    selectedAlbums?:selectedAlbums[];
-    setSelectedAlbums?:Dispatch<SetStateAction<selectedAlbums[]>>
+    currentSong: selectedSongs | null;
+    selectedAlbums?: selectedAlbums[];
+    setSelectedAlbums?: Dispatch<SetStateAction<selectedAlbums[]>>
     setSelectedSongs: Dispatch<SetStateAction<selectedSongs[]>>,
     setCurrentSong: Dispatch<SetStateAction<selectedSongs | null>>
 }
@@ -27,11 +27,12 @@ export interface Songtypes {
     image?: string;
     audio: string
     artist?: string
+    lyrics: string
 }
 
 export interface AlbumItenary {
-    S_no:number;
-    // lyrics:string;
+    S_no: number;
+    lyrics: string;
     duration: number;
     title: string;
     audio: string;
@@ -44,7 +45,7 @@ export interface AlbumItenary {
 
 export interface PlaylistItemTypes {
     id: number;
-    // lyrics:string;
+    lyrics: string;
     albumId: number;
     name: string;
     image: string;
@@ -55,10 +56,10 @@ export interface PlaylistItemTypes {
 }
 
 export interface selectedAlbums {
-    title:string;
-    image?:string;
-    id?:number;
-    songs?:selectedSongs[];
+    title: string;
+    image?: string;
+    id?: number;
+    songs?: selectedSongs[];
 }
 export interface selectedSongs {
     title: string
@@ -67,6 +68,7 @@ export interface selectedSongs {
     image?: string;
     artist?: string;
     duration?: number;
+    lyrics: string
 }
 
 export interface albumsTypes {
@@ -78,8 +80,8 @@ export interface albumsTypes {
 
 export interface ArtistDataTypes {
     id: number;
-    title:string;
-    genre:string;
+    title: string;
+    genre: string;
     image?: string;
 }
 
@@ -87,13 +89,13 @@ export interface artistTypes {
     id: number;
     title?: string;
     image?: string;
-    artist?:string;
+    artist?: string;
 }
 
 export interface artistStateTypes {
     duration: number;
     id: number;
-    // lyrics:string;
+    lyrics: string;
     albumId: number;
     title: string;
     image: string;
@@ -109,8 +111,9 @@ export interface SearchTypes {
     id: number;
     title: string;
     value?: string;
-    audio: string
+    audio: string;
     artist?: string;
+    lyrics: string;
 }
 
 export interface SearchAlbumTypes {
@@ -140,21 +143,28 @@ export interface playbarTypes {
 export interface PlayProps {
     song: selectedSongs;
     onEnd: () => void;
-    setSelectedSong: Dispatch<SetStateAction<selectedSongs[]>>
+    setSelectedSong: Dispatch<SetStateAction<selectedSongs[]>>;
+    showDetails: boolean;
+    setDetails: Dispatch<SetStateAction<boolean>>;
 }
 
-export interface albumsProps{
-  albums:albumsTypes[];
+export interface albumsProps {
+    albums: albumsTypes[];
 }
 
-export interface artistProps{
-    artist:artistTypes[];
+export interface artistProps {
+    artist: artistTypes[];
 }
 
-export interface songsProps{
-    playlists:Songtypes[];
+export interface songsProps {
+    playlists: Songtypes[];
 }
 
 export interface carouselTypes {
-    carousel:Songtypes[];
+    carousel: Songtypes[];
+}
+export interface lyricProps {
+    currentSong: selectedSongs | null;
+    showDetails:boolean;
+    setDetails:Dispatch<SetStateAction<boolean>>;
 }

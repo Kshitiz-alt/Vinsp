@@ -4,15 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import type { PlayProps } from "../../types";
 import { ProperTime, ProperTitle } from '../../Constants/Fetch';
 import { useLayoutContext } from '../../Constants/Context';
-import { LuPause, LuPlay } from 'react-icons/lu';
+import { LuMicVocal, LuPause, LuPlay } from 'react-icons/lu';
 import { BiVolumeFull, BiVolumeLow } from 'react-icons/bi';
+import { useIsMobile } from '../../Constants/useIsMobile';
 
 
 
 
 
 
-const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
+const Playbar = ({ song, onEnd, setSelectedSong, showDetails, setDetails }: PlayProps) => {
 
     //State handling
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -26,13 +27,16 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
     //Child component handling
     const { extend } = useLayoutContext();
 
+    //For modbile & 640px devices
+    const extendForMobile = useIsMobile()
+
 
     // Mounts when the player extends - fallback
     useEffect(() => {
         if (extended) {
             const timeOut = setTimeout(() => {
                 toggleExtend()
-            }, 10000)
+            }, 20000)
             return () => clearTimeout(timeOut)
         }
     }, [extended, song, toggleExtend]);
@@ -62,7 +66,7 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
                 }
             }
         } catch (err) {
-            console.error("playbar Error:",err)
+            console.error("playbar Error:", err)
         }
     }, [song]);
 
@@ -88,7 +92,7 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
             setCurrentTime(audio.currentTime)
             setDuration(audio.duration || 0)
         }
-    }
+    };
 
     //handle to play song
     const onPlayHandle = () => {
@@ -121,21 +125,18 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
         if (audioRef.current) {
             audioRef.current.volume = percentToVolume(volume)
         }
-    }, [volume])
+    }, [volume]);
 
     const VolumeUp = () => {
         const percentage = Math.min(volume + 10, 100);
         console.log(percentage, "volUp")
         setVolume(percentage)
-    }
+    };
     const VolumeDown = () => {
         const percentage = Math.max(volume - 10, 0);
         console.log(percentage, "volDown")
         setVolume(percentage)
-    }
-
-
-
+    };
 
     return (
         <AnimatePresence>
@@ -156,7 +157,7 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
                     }
                 }}
                 className={`fixed z-40 bg-Gray/50 backdrop-blur-2xl inset-shadow-2xs inset-shadow-cream h-18 p-3 rounded-full flex items-center gap-2 transition-all duration-200 ease-in-out
-                     ${extended ? " cursor-default max-sm:min-w-11/12 md:w-8/12 xl:w-full" : "w-18 cursor-pointer"}
+                     ${extended ? " cursor-default max-sm:min-w-11/12 md:w-8/12 xl:w-full" : "w-18 max-sm:min-w-11/12 max-sm:h-16 cursor-pointer"}
                       ${extend ? "bottom-10 right-20" : "bottom-10 xl:left-20 max-sm:left-3 md:left-5"}
                     `}
 
@@ -165,8 +166,8 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
 
 
 
-                {extended && (
-                    <div className='flex justify-between xl:gap-5 max-sm:justify-between md:gap-5 items-center'>
+                {(extended || extendForMobile) && (
+                    <div className='flex justify-between items-center xl:gap-5 max-sm:justify-between md:gap-5'>
                         <div className='flex xl:flex-row max-sm:flex-col md:flex-col max-sm:gap-2 md:gap-2'>
                             <motion.div
                                 initial={{ opacity: 0 }}
@@ -175,7 +176,7 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
                                 transition={{ duration: 2 }}
                                 className="flex flex-col">
                                 <p className="text-white xl:text-lg xl:w-96 max-sm:w-30 md:w-70 max-sm:line-clamp-1 md:line-clamp-1 max-sm:text-sm md:text-sm">{ProperTitle(song.title)}</p>
-                                <span className='text-cream xl:text-sm max-sm:text-[12px] md:text-[12px]'>{song.artist}</span>
+                                <span className='text-cream xl:text-sm max-sm:text-[10px] md:text-[12px]'>{song.artist}</span>
                             </motion.div>
                             <motion.div
                                 className='flex items-center gap-3 text-white text-[12px]'
@@ -184,17 +185,17 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 2 }}
                             >
-                                <span className='xl:flex xl:text-nowrap max-sm:text-nowrap max-sm:text-[8px] md:hidden'>{ProperTime(currentTime)}</span>
+                                <span className='xl:flex xl:text-nowrap max-sm:text-nowrap max-sm:text-[9px] md:hidden'>{ProperTime(currentTime)}</span>
 
                                 <input
-                                    className='cursor-pointer xl:w-full rangeSM md:w-3/4'
+                                    className='cursor-pointer max-sm:w-3/4 xl:w-full rangeSM md:w-3/4'
                                     type="range"
                                     min={0}
                                     max={duration || 0}
                                     value={currentTime}
                                     onChange={handleSeek}
                                 />
-                                <span className='xl:flex xl:text-nowrap max-sm:text-nowrap max-sm:text-[8px]  md:hidden'>{ProperTime(duration)}</span>
+                                <span className='xl:flex xl:text-nowrap max-sm:text-nowrap max-sm:text-[9px]  md:hidden'>{ProperTime(duration)}</span>
                             </motion.div>
                         </div>
 
@@ -207,7 +208,7 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
                                 e.stopPropagation()
                                 onPlayHandle()
                             }}
-                            className='cursor-pointer text-white'>
+                            className='cursor-pointer text-white max-sm:px-2'>
                             {isPlaying ? <LuPause size={25} /> : <LuPlay size={25} />}
                         </motion.button>
                         <input
@@ -220,7 +221,8 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
                                 const songSet = {
                                     title: song.title,
                                     audio: song.audio,
-                                    image: song.image
+                                    image: song.image,
+                                    lyrics: song.lyrics
                                 }
                                 setSelectedSong((prev) => {
                                     if (isChecked) return [...prev, songSet];
@@ -229,6 +231,15 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
                             }}
 
                         />
+
+                        <figure
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setDetails(!showDetails)
+                            }}
+                            className='text-white hover:text-cream cursor-pointer'>
+                            <LuMicVocal size={25} />
+                        </figure>
 
 
 
@@ -263,7 +274,7 @@ const Playbar = ({ song, onEnd, setSelectedSong }: PlayProps) => {
 
                 <audio ref={audioRef} className='bg-white w-60' onTimeUpdate={handleUpdate} onLoadedMetadata={handleUpdate}></audio>
             </motion.figure>
-        </AnimatePresence>
+        </AnimatePresence >
     )
 }
 

@@ -44,6 +44,7 @@ const Mainpage = () => {
         const formatted = animatedAlbums.map(result => result.rows?.[0]);
         console.log("these are songs?", animatedAlbums)
         setCarousel(formatted)
+        
         const res = await SONGS("ad", 5, 1);
         if (res) {
           setPlaylists(res.result)
@@ -103,7 +104,7 @@ const Mainpage = () => {
   return (
     <section ref={page} className="h-[96.8svh] max-sm:min-w-0 w-full">
       <Carousel carousel={carousel}/>
-      <div className="relative w-full flex-col -mt-10 md:px-4">
+      <div className="relative w-full flex-col -mt-10 md:px-4 xl:py-20">
         <NewTracksSub playlists={playlists} />
         <Albums albums={albums} />
         <ArtistsSub artist={artist} />

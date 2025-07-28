@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import Playbar from "../subComponents/Playbar";
 import { LayoutContext } from "../../Constants/Context";
 import Loader from "../subComponents/Animations/Loader";
+import Lyrics from "./Layouts/Lyrics";
+import { AnimatePresence } from "framer-motion";
 
 
 
@@ -13,6 +15,7 @@ const Layout = () => {
   const [selectedSongs, setSelectedSongs] = useState<selectedSongs[]>([]);
   const [selectedAlbums, setSelectedAlbums] = useState<selectedAlbums[]>([])
   const [currentSong, setCurrentSong] = useState<selectedSongs | null>(null);
+  const [showDetails,setDetails] = useState(false)
   const [loading, setLoading] = useState(true)
   const [extend, setExtend] = useState(false)
 
@@ -37,26 +40,34 @@ const Layout = () => {
       <LayoutContext.Provider value={{ extend, setExtend }}>
         <Navbar />
         <div className="flex">
-          <aside className="">
             <Sidebar selectedSongs={selectedSongs} selectedAlbums={selectedAlbums} />
-          </aside>
-          <div className="w-full px-20 relative max-sm:px-3 md:px-15">
+          <div className={`px-20 relative max-sm:px-3 md:px-15 ${showDetails ? "w-[84%]":"w-full"}`}>
             <Outlet context={{ selectedSongs, setSelectedSongs, currentSong, setCurrentSong, selectedAlbums, setSelectedAlbums }} />
           </div>
+          {showDetails && (
+            <AnimatePresence mode="wait" >
+              <Lyrics currentSong={currentSong} showDetails={showDetails} setDetails={setDetails}/>
+            </AnimatePresence>
+          )}
         </div>
         {currentSong && (
           <Playbar
             song={currentSong}
+            setSelectedSong={setSelectedSongs} 
+            showDetails={showDetails}
+            setDetails={setDetails}
             onEnd={() => {
               const CurntIndex = selectedSongs.findIndex(s => s.audio === currentSong.audio);
               const nextIndex = selectedSongs[CurntIndex + 1];
               if (nextIndex) {
                 setCurrentSong(nextIndex);
+                setDetails(true)
               } else {
                 setCurrentSong(null)
+                setDetails(false)
               }
             }}
-            setSelectedSong={setSelectedSongs} />
+            />
         )}
       </LayoutContext.Provider>
     </section>

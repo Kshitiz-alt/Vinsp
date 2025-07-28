@@ -23,7 +23,8 @@ const SearchPage = () => {
       title: song.title,
       audio: song.audio,
       id: song.id,
-      image: song.image
+      image: song.image,
+      lyrics: song.lyrics
     };
     setCurrentSong(selected)
   }

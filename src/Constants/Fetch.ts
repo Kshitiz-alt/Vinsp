@@ -80,6 +80,11 @@ export function ProperTime(time:number){
     return `${minutes} : ${seconds}`
 }
 
-// export const delay = (ms:number) => {
-//    return new Promise(resolve => setTimeout(resolve,ms))
-// }
+export function ProperLyrics(raw:string):string{
+    return raw
+    .replace(/(\[.*?\])/g, "\n\n$1\n")
+    // Insert newline between lowercase and uppercase (e.g., end of a sentence and next line starts)
+    .replace(/([a-z])([A-Z])/g, "$1\n$2")
+    // Trim excess whitespace
+    .trim();
+}

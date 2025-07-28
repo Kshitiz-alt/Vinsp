@@ -66,7 +66,8 @@ const AlbumsPage = () => {
       audio: song.audio,
       duration: song.duration || 0,
       id: song.id,
-      image: song.image
+      image: song.image,
+      lyrics: song.lyrics
     };
     setCurrentSong(selected);
 
@@ -117,7 +118,8 @@ const AlbumsPage = () => {
                         audio: song.audio,
                         image: song.image,
                         artist: song.artist,
-                        duration: song.duration
+                        duration: song.duration,
+                        lyrics: song.lyrics
                       }))
                       setSelectedSongs(selected)
                       setCurrentSong(selected[0])
@@ -165,7 +167,7 @@ const AlbumsPage = () => {
             duration={element.duration}
             title={element.title}
             image={element.image}
-            // lyrics={element.lyrics}
+            lyrics={element.lyrics}
             audio={element.audio}
             onAudioPlay={(audio) => handleNewAudio(audio, element.title, element)}
             isCurrent={isTitle === element.title}
@@ -174,7 +176,8 @@ const AlbumsPage = () => {
               const songSet = {
                 title: song.title,
                 audio: element.audio,
-                image: element.image
+                image: element.image,
+                lyrics: element.lyrics
               }
               setSelectedSongs((prev) => {
                 if (isChecked) return [...prev, songSet]

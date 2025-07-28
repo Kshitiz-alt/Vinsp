@@ -50,10 +50,10 @@ const Navbar = () => {
                         </motion.div>
                     </AnimatePresence>
                     <motion.div
-                        key="git-icon"
+                        key="Home-Icon"
                         whileTap={{ rotate: 90 }}
                         whileHover={{ scale: 1.05 }}
-                        className="flex items-center gap-2 p-3 px-3 bg-gradient-to-r from-white to-white/70 border-2 focus-within:border-purple-500 rounded-full cursor-pointer">
+                        className="flex items-center gap-2 p-3 px-3 bg-gradient-to-r from-white to-white/70 border-2 focus-within:border-purple-500 rounded-full cursor-pointer max-sm:hidden md:hidden xl:block">
                         <Link to="/">
                             <BiHomeSmile size={23} />
                         </Link>
