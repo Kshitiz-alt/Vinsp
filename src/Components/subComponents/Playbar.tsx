@@ -237,7 +237,7 @@ const Playbar = ({ song, onEnd, setSelectedSong, showDetails, setDetails }: Play
                                 e.stopPropagation();
                                 setDetails(!showDetails)
                             }}
-                            className='text-white hover:text-cream cursor-pointer'>
+                            className='text-white hover:text-cream cursor-pointer max-sm:hidden md:hidden xl:block'>
                             <LuMicVocal size={25} />
                         </figure>
 
