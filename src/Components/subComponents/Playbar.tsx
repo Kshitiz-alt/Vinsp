@@ -157,7 +157,7 @@ const Playbar = ({ song, onEnd, setSelectedSong, showDetails, setDetails }: Play
                     }
                 }}
                 className={`fixed z-40 bg-Gray/50 backdrop-blur-2xl inset-shadow-2xs inset-shadow-cream h-18 p-3 rounded-full flex items-center gap-2 transition-all duration-200 ease-in-out
-                     ${extended ? " cursor-default max-sm:min-w-11/12 md:w-8/12 xl:w-full" : "w-18 max-sm:min-w-11/12 max-sm:h-16 cursor-pointer"}
+                     ${extended ? " cursor-default max-sm:min-w-11/12 md:w-8/12 xl:w-full" : "w-18 max-sm:min-w-11/12  cursor-pointer"}
                       ${extend ? "bottom-10 right-20" : "bottom-10 xl:left-20 max-sm:left-3 md:left-5"}
                     `}
 
