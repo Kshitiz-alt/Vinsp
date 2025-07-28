@@ -6,7 +6,7 @@ import { ProperTime, ProperTitle } from "../../Constants/Fetch"
 
 
 
-const PlaylistItem = ({ S_no, duration, artist, onSelect, title, audio, image, isCurrent, onAudioPlay }: AlbumItenary) => {
+const PlaylistItem = ({ S_no, duration, artist, onSelect,lyrics, title, audio, image, isCurrent, onAudioPlay }: AlbumItenary) => {
 
     const hoverRef = useRef(null)
     const audioRef = useRef<HTMLAudioElement>(null)
@@ -81,7 +81,7 @@ const PlaylistItem = ({ S_no, duration, artist, onSelect, title, audio, image, i
                         className="h-4 w-4 shrink-0 self-center appearance-none bg-white checked:bg-green-300 checked:rounded-full rounded-[3px]"
                         type="checkbox"
                         onClick={(e) => e.stopPropagation()}
-                        onChange={(e) => onSelect?.({ title, audio, image }, e.target.checked)}
+                        onChange={(e) => onSelect?.({ title, audio, image, lyrics }, e.target.checked)}
                     />
                 </div>
 
@@ -91,5 +91,5 @@ const PlaylistItem = ({ S_no, duration, artist, onSelect, title, audio, image, i
     )
 }
 
-export default PlaylistItem
+export default PlaylistItem;
 

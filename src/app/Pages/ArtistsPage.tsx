@@ -71,6 +71,7 @@ const ArtistsPage = () => {
             duration: song.duration || 0,
             id: song.id,
             image: song.image,
+            lyrics: song.lyrics
         };
         setCurrentSong(selected);
     };
@@ -126,7 +127,8 @@ const ArtistsPage = () => {
                                                 audio: song.audio,
                                                 image: song.image,
                                                 artist: song.artist,
-                                                duration: song.duration
+                                                duration: song.duration,
+                                                lyrics: song.lyrics
                                             }))
                                             setSelectedSongs(selected)
                                             setCurrentSong(selected[0])
@@ -165,7 +167,7 @@ const ArtistsPage = () => {
                         S_no={index + 1}
                         duration={element.duration}
                         title={element.title}
-                        // lyrics={element.lyrics}
+                        lyrics={element.lyrics}
                         image={element.image}
                         audio={element.audio}
                         artist={element.artist}
@@ -176,6 +178,7 @@ const ArtistsPage = () => {
                                 title: song.title,
                                 audio: element.audio,
                                 image: element.image,
+                                lyrics: song.lyrics
                             };
                             setSelectedSongs((prev) =>
                                 isChecked ? [...prev, songSet] : prev.filter((s) => s.audio !== songSet.audio)
