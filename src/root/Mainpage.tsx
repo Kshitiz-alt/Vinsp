@@ -31,13 +31,13 @@ const Mainpage = () => {
 
   useEffect(() => {
     const ids = ["1007", "1002", "1008", "1004", "1005"];
-    const idOfArtists = ["10001", "10002", "10003", "10004", "10006"];
+    const idOfArtists = ["10001", "10002", "10003", "10012", "10006"];
 
     const fetchData = async () => {
       try {
         setLoading(true)
 
-        const idsInCarousel = ["1007", "1002", "1003", "1004", "1005", "1006", "1008", "1009", "1010", "1011"];
+        const idsInCarousel = ["1007", "1002", "1003", "1012", "1005", "1006", "1008", "1009", "1010", "1011"];
         const animatedAlbums = await Promise.all(
           idsInCarousel.map(id => CAROUSEL(Number(id)))
         )
